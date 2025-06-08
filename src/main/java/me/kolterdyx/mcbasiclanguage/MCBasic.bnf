@@ -1,0 +1,31 @@
+// Copyright 2000-2022 JetBrains s.r.o. and other contributors. Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
+{
+  parserClass="me.kolterdyx.mcbasiclanguage.parser.MCBasicParser"
+
+  extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
+
+  psiClassPrefix="MCBasic"
+  psiImplClassSuffix="Impl"
+  psiPackage="me.kolterdyx.mcbasiclanguage.psi"
+  psiImplPackage="me.kolterdyx.mcbasiclanguage.psi.impl"
+
+  elementTypeHolderClass="me.kolterdyx.mcbasiclanguage.psi.MCBasicTypes"
+  elementTypeClass="me.kolterdyx.mcbasiclanguage.psi.MCBasicElementType"
+  tokenTypeClass="me.kolterdyx.mcbasiclanguage.psi.MCBasicTokenType"
+
+  psiImplUtilClass="me.kolterdyx.mcbasiclanguage.psi.impl.MCBasicPsiImplUtil"
+}
+
+mcbasicFile ::= item_*
+
+private item_ ::= (property|COMMENT|CRLF)
+
+property ::= (KEY? SEPARATOR VALUE?) | KEY {
+  pin=3
+  recoverWhile="recover_property"
+  mixin="me.kolterdyx.mcbasiclanguage.psi.impl.MCBasicNamedElementImpl"
+  implements="me.kolterdyx.mcbasiclanguage.psi.MCBasicNamedElement"
+  methods=[getKey getValue getName setName getNameIdentifier getPresentation]
+}
+
+private recover_property ::= !(KEY|SEPARATOR|COMMENT)

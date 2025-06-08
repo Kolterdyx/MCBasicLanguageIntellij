@@ -1,0 +1,64 @@
+<!-- Copyright 2000-2023 JetBrains s.r.o. and contributors. Use of this source code is governed by the Apache 2.0 license. -->
+<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
+
+<idea-plugin>
+
+  <!-- Unique id for this plugin. Must stay constant for the life of the plugin. -->
+  <id>me.kolterdyx.mcbasiclanguage</id>
+
+  <!-- Text to display as name on Settings | Plugin page -->
+  <name>MCBasic Language</name>
+
+  <!-- Product and plugin compatibility requirements -->
+  <depends>com.intellij.modules.platform</depends>
+  <depends>com.intellij.java</depends>
+
+  <!-- Text to display as description on Settings | Plugin page -->
+  <description>
+    <![CDATA[
+      MCBasic is a custom language designed for easily creating Minecraft datapacks
+    ]]>
+  </description>
+  <change-notes>
+    <![CDATA[
+      <ul>
+      </ul>
+    ]]>
+  </change-notes>
+
+  <!-- Text to display as company information on Settings | Plugin page -->
+  <vendor url="https://cirogarcia.dev">Ciro García Belmonte</vendor>
+
+  <extensions defaultExtensionNs="com.intellij">
+    <fileType name="MCBasic File" implementationClass="me.kolterdyx.mcbasiclanguage.MCBasicFileType" fieldName="INSTANCE"
+              language="MCBasic" extensions="mcb"/>
+    <lang.parserDefinition language="MCBasic" implementationClass="me.kolterdyx.mcbasiclanguage.MCBasicParserDefinition"/>
+    <lang.syntaxHighlighterFactory language="MCBasic"
+                                   implementationClass="me.kolterdyx.mcbasiclanguage.MCBasicSyntaxHighlighterFactory"/>
+    <iconProvider implementation="me.kolterdyx.mcbasiclanguage.MCBasicPropertyIconProvider"/>
+    <colorSettingsPage implementation="me.kolterdyx.mcbasiclanguage.MCBasicColorSettingsPage"/>
+    <annotator language="JAVA" implementationClass="me.kolterdyx.mcbasiclanguage.MCBasicAnnotator"/>
+    <codeInsight.lineMarkerProvider language="JAVA"
+                                    implementationClass="me.kolterdyx.mcbasiclanguage.MCBasicLineMarkerProvider"/>
+    <completion.contributor language="MCBasic"
+                            implementationClass="me.kolterdyx.mcbasiclanguage.MCBasicCompletionContributor"/>
+    <psi.referenceContributor language="JAVA"
+                              implementation="me.kolterdyx.mcbasiclanguage.MCBasicReferenceContributor"/>
+    <lang.refactoringSupport language="MCBasic"
+                             implementationClass="me.kolterdyx.mcbasiclanguage.MCBasicRefactoringSupportProvider"/>
+    <lang.findUsagesProvider language="MCBasic"
+                             implementationClass="me.kolterdyx.mcbasiclanguage.MCBasicFindUsagesProvider"/>
+    <lang.foldingBuilder language="JAVA" implementationClass="me.kolterdyx.mcbasiclanguage.MCBasicFoldingBuilder"/>
+    <gotoSymbolContributor implementation="me.kolterdyx.mcbasiclanguage.MCBasicChooseByNameContributor"/>
+    <lang.psiStructureViewFactory language="MCBasic"
+                                  implementationClass="me.kolterdyx.mcbasiclanguage.MCBasicStructureViewFactory"/>
+    <navbar implementation="me.kolterdyx.mcbasiclanguage.MCBasicStructureAwareNavbar"/>
+    <lang.formatter language="MCBasic" implementationClass="me.kolterdyx.mcbasiclanguage.MCBasicFormattingModelBuilder"/>
+    <codeStyleSettingsProvider implementation="me.kolterdyx.mcbasiclanguage.MCBasicCodeStyleSettingsProvider"/>
+    <langCodeStyleSettingsProvider implementation="me.kolterdyx.mcbasiclanguage.MCBasicLanguageCodeStyleSettingsProvider"/>
+    <lang.commenter language="MCBasic" implementationClass="me.kolterdyx.mcbasiclanguage.MCBasicCommenter"/>
+    <lang.documentationProvider language="MCBasic" implementationClass="me.kolterdyx.mcbasiclanguage.MCBasicDocumentationProvider"/>
+    <spellchecker.support language="MCBasic" implementationClass="me.kolterdyx.mcbasiclanguage.MCBasicSpellcheckingStrategy"/>
+  </extensions>
+
+</idea-plugin>
