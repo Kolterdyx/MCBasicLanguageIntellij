@@ -4,10 +4,10 @@ package me.kolterdyx.mcbasiclanguage.psi.impl;
 
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
-import me.kolterdyx.mcbasiclanguage.psi.MCBasicNamedElement;
+import com.intellij.psi.PsiNameIdentifierOwner;
 import org.jetbrains.annotations.NotNull;
 
-public abstract class MCBasicNamedElementImpl extends ASTWrapperPsiElement implements MCBasicNamedElement {
+public abstract class MCBasicNamedElementImpl extends ASTWrapperPsiElement implements PsiNameIdentifierOwner {
 
   public MCBasicNamedElementImpl(@NotNull ASTNode node) {
     super(node);

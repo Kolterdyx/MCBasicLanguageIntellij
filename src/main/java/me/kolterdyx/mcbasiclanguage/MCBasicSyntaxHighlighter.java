@@ -9,57 +9,110 @@ import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
-import me.kolterdyx.mcbasiclanguage.MCBasicLexerAdapter;
 import me.kolterdyx.mcbasiclanguage.psi.MCBasicTypes;
 import org.jetbrains.annotations.NotNull;
+
+
+import java.util.List;
 
 import static com.intellij.openapi.editor.colors.TextAttributesKey.createTextAttributesKey;
 
 public class MCBasicSyntaxHighlighter extends SyntaxHighlighterBase {
 
-  public static final TextAttributesKey SEPARATOR =
-      createTextAttributesKey("MCB_SEPARATOR", DefaultLanguageHighlighterColors.OPERATION_SIGN);
-  public static final TextAttributesKey KEY =
-      createTextAttributesKey("MCB_KEY", DefaultLanguageHighlighterColors.KEYWORD);
-  public static final TextAttributesKey VALUE =
-      createTextAttributesKey("MCB_VALUE", DefaultLanguageHighlighterColors.STRING);
-  public static final TextAttributesKey COMMENT =
-      createTextAttributesKey("MCB_COMMENT", DefaultLanguageHighlighterColors.LINE_COMMENT);
-  public static final TextAttributesKey BAD_CHARACTER =
-      createTextAttributesKey("MCB_BAD_CHARACTER", HighlighterColors.BAD_CHARACTER);
+    private static final List<IElementType> KEYWORDS = List.of(
+            MCBasicTypes.KEYWORD_IF,
+            MCBasicTypes.KEYWORD_ELSE,
+            MCBasicTypes.KEYWORD_RETURN,
+            MCBasicTypes.KEYWORD_FUNC,
+            MCBasicTypes.KEYWORD_LET,
+            MCBasicTypes.KEYWORD_FROM,
+            MCBasicTypes.KEYWORD_IMPORT,
+            MCBasicTypes.KEYWORD_INT,
+            MCBasicTypes.KEYWORD_DOUBLE,
+            MCBasicTypes.KEYWORD_STR,
+            MCBasicTypes.KEYWORD_STRUCT,
+            MCBasicTypes.KEYWORD_EXEC,
+            MCBasicTypes.KEYWORD_AS
+    );
 
+    private static final TextAttributesKey[] KEYWORD_KEYS = new TextAttributesKey[]{
+            createTextAttributesKey("MCB_KEYWORD", DefaultLanguageHighlighterColors.KEYWORD),
+    };
 
-  private static final TextAttributesKey[] BAD_CHAR_KEYS = new TextAttributesKey[]{BAD_CHARACTER};
-  private static final TextAttributesKey[] SEPARATOR_KEYS = new TextAttributesKey[]{SEPARATOR};
-  private static final TextAttributesKey[] KEY_KEYS = new TextAttributesKey[]{KEY};
-  private static final TextAttributesKey[] VALUE_KEYS = new TextAttributesKey[]{VALUE};
-  private static final TextAttributesKey[] COMMENT_KEYS = new TextAttributesKey[]{COMMENT};
-  private static final TextAttributesKey[] EMPTY_KEYS = new TextAttributesKey[0];
+    private static final TextAttributesKey[] BRACE_KEYS = new TextAttributesKey[]{
+            createTextAttributesKey("MCB_BRACES", DefaultLanguageHighlighterColors.BRACES)
+    };
 
-  @NotNull
-  @Override
-  public Lexer getHighlightingLexer() {
-    return new MCBasicLexerAdapter();
-  }
+    private static final TextAttributesKey[] BRACKET_KEYS = new TextAttributesKey[]{
+            createTextAttributesKey("MCB_BRACKETS", DefaultLanguageHighlighterColors.BRACKETS)
+    };
 
-  @Override
-  public TextAttributesKey @NotNull [] getTokenHighlights(IElementType tokenType) {
-    if (tokenType.equals(MCBasicTypes.SEPARATOR)) {
-      return SEPARATOR_KEYS;
+    private static final TextAttributesKey[] PAREN_KEYS = new TextAttributesKey[]{
+            createTextAttributesKey("MCB_PARENS", DefaultLanguageHighlighterColors.PARENTHESES)
+    };
+
+    private static final TextAttributesKey[] SEMICOLON_KEYS = new TextAttributesKey[]{
+            createTextAttributesKey("MCB_SEMICOLON", DefaultLanguageHighlighterColors.SEMICOLON)
+    };
+
+    private static final TextAttributesKey[] BAD_CHAR_KEYS = new TextAttributesKey[]{
+            createTextAttributesKey("MCB_BAD_CHARACTER", HighlighterColors.BAD_CHARACTER)
+    };
+
+    private static final TextAttributesKey[] COMMENT_KEYS = new TextAttributesKey[]{
+            createTextAttributesKey("MCB_COMMENT", DefaultLanguageHighlighterColors.LINE_COMMENT)
+    };
+
+    private static final TextAttributesKey[] EMPTY_KEYS = new TextAttributesKey[0];
+
+    @NotNull
+    @Override
+    public Lexer getHighlightingLexer() {
+        return new MCBasicLexerAdapter();
     }
-    if (tokenType.equals(MCBasicTypes.KEY)) {
-      return KEY_KEYS;
+
+    @Override
+    public TextAttributesKey @NotNull [] getTokenHighlights(IElementType tokenType) {
+        if (tokenType.equals(MCBasicTypes.FUNCTION_CALL)) {
+            return new TextAttributesKey[]{DefaultLanguageHighlighterColors.FUNCTION_CALL};
+        }
+        if (tokenType.equals(MCBasicTypes.STRING_LITERAL)) {
+            return new TextAttributesKey[]{DefaultLanguageHighlighterColors.STRING};
+        }
+        if (tokenType.equals(MCBasicTypes.INTEGER_LITERAL)) {
+            return new TextAttributesKey[]{DefaultLanguageHighlighterColors.NUMBER};
+        }
+        if (tokenType.equals(MCBasicTypes.DOUBLE_LITERAL)) {
+            return new TextAttributesKey[]{DefaultLanguageHighlighterColors.NUMBER};
+        }
+        if (tokenType.equals(MCBasicTypes.PUNCTUATION_RBRACE) || tokenType.equals(MCBasicTypes.PUNCTUATION_LBRACE)) {
+            return BRACE_KEYS;
+        }
+        if (tokenType.equals(MCBasicTypes.PUNCTUATION_RBRACKET) || tokenType.equals(MCBasicTypes.PUNCTUATION_LBRACKET)) {
+            return BRACKET_KEYS;
+        }
+        if (tokenType.equals(MCBasicTypes.PUNCTUATION_RPAREN) || tokenType.equals(MCBasicTypes.PUNCTUATION_LPAREN)) {
+            return PAREN_KEYS;
+        }
+        if (KEYWORDS.contains(tokenType)) {
+            return KEYWORD_KEYS;
+        }
+        if (tokenType.equals(MCBasicTypes.PUNCTUATION_SEMICOLON)) {
+            return SEMICOLON_KEYS;
+        }
+        if (tokenType.equals(MCBasicTypes.PUNCTUATION_COMMA)) {
+            return new TextAttributesKey[]{DefaultLanguageHighlighterColors.COMMA};
+        }
+        if (tokenType.equals(MCBasicTypes.PUNCTUATION_DOT)) {
+            return new TextAttributesKey[]{DefaultLanguageHighlighterColors.DOT};
+        }
+        if (tokenType.equals(MCBasicTypes.COMMENT)) {
+            return COMMENT_KEYS;
+        }
+        if (tokenType.equals(TokenType.BAD_CHARACTER)) {
+            return BAD_CHAR_KEYS;
+        }
+        return EMPTY_KEYS;
     }
-    if (tokenType.equals(MCBasicTypes.VALUE)) {
-      return VALUE_KEYS;
-    }
-    if (tokenType.equals(MCBasicTypes.COMMENT)) {
-      return COMMENT_KEYS;
-    }
-    if (tokenType.equals(TokenType.BAD_CHARACTER)) {
-      return BAD_CHAR_KEYS;
-    }
-    return EMPTY_KEYS;
-  }
 
 }

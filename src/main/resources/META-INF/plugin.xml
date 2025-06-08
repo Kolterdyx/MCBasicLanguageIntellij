@@ -35,30 +35,6 @@
     <lang.parserDefinition language="MCBasic" implementationClass="me.kolterdyx.mcbasiclanguage.MCBasicParserDefinition"/>
     <lang.syntaxHighlighterFactory language="MCBasic"
                                    implementationClass="me.kolterdyx.mcbasiclanguage.MCBasicSyntaxHighlighterFactory"/>
-    <iconProvider implementation="me.kolterdyx.mcbasiclanguage.MCBasicPropertyIconProvider"/>
-    <colorSettingsPage implementation="me.kolterdyx.mcbasiclanguage.MCBasicColorSettingsPage"/>
-    <annotator language="JAVA" implementationClass="me.kolterdyx.mcbasiclanguage.MCBasicAnnotator"/>
-    <codeInsight.lineMarkerProvider language="JAVA"
-                                    implementationClass="me.kolterdyx.mcbasiclanguage.MCBasicLineMarkerProvider"/>
-    <completion.contributor language="MCBasic"
-                            implementationClass="me.kolterdyx.mcbasiclanguage.MCBasicCompletionContributor"/>
-    <psi.referenceContributor language="JAVA"
-                              implementation="me.kolterdyx.mcbasiclanguage.MCBasicReferenceContributor"/>
-    <lang.refactoringSupport language="MCBasic"
-                             implementationClass="me.kolterdyx.mcbasiclanguage.MCBasicRefactoringSupportProvider"/>
-    <lang.findUsagesProvider language="MCBasic"
-                             implementationClass="me.kolterdyx.mcbasiclanguage.MCBasicFindUsagesProvider"/>
-    <lang.foldingBuilder language="JAVA" implementationClass="me.kolterdyx.mcbasiclanguage.MCBasicFoldingBuilder"/>
-    <gotoSymbolContributor implementation="me.kolterdyx.mcbasiclanguage.MCBasicChooseByNameContributor"/>
-    <lang.psiStructureViewFactory language="MCBasic"
-                                  implementationClass="me.kolterdyx.mcbasiclanguage.MCBasicStructureViewFactory"/>
-    <navbar implementation="me.kolterdyx.mcbasiclanguage.MCBasicStructureAwareNavbar"/>
-    <lang.formatter language="MCBasic" implementationClass="me.kolterdyx.mcbasiclanguage.MCBasicFormattingModelBuilder"/>
-    <codeStyleSettingsProvider implementation="me.kolterdyx.mcbasiclanguage.MCBasicCodeStyleSettingsProvider"/>
-    <langCodeStyleSettingsProvider implementation="me.kolterdyx.mcbasiclanguage.MCBasicLanguageCodeStyleSettingsProvider"/>
-    <lang.commenter language="MCBasic" implementationClass="me.kolterdyx.mcbasiclanguage.MCBasicCommenter"/>
-    <lang.documentationProvider language="MCBasic" implementationClass="me.kolterdyx.mcbasiclanguage.MCBasicDocumentationProvider"/>
-    <spellchecker.support language="MCBasic" implementationClass="me.kolterdyx.mcbasiclanguage.MCBasicSpellcheckingStrategy"/>
   </extensions>
 
 </idea-plugin>
