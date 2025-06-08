@@ -42,6 +42,9 @@ DecDouble = [0-9]*\.[0-9]+([eE][+-]?[0-9]+)?
     "as"                            { yybegin(YYINITIAL); return MCBasicTypes.KEYWORD_AS; }
     "from"                          { yybegin(YYINITIAL); return MCBasicTypes.KEYWORD_FROM; }
     "struct"                        { yybegin(YYINITIAL); return MCBasicTypes.KEYWORD_STRUCT; }
+    "int"                           { yybegin(YYINITIAL); return MCBasicTypes.KEYWORD_INT; }
+    "str"                           { yybegin(YYINITIAL); return MCBasicTypes.KEYWORD_STR; }
+    "double"                        { yybegin(YYINITIAL); return MCBasicTypes.KEYWORD_DOUBLE; }
 
     /* Operators */
     "="                             { yybegin(YYINITIAL); return MCBasicTypes.OP_ASSIGN; }

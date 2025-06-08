@@ -19,6 +19,10 @@ import static com.intellij.openapi.editor.colors.TextAttributesKey.createTextAtt
 
 public class MCBasicSyntaxHighlighter extends SyntaxHighlighterBase {
 
+    public static final TextAttributesKey FUNCTION_DECLARATION = createTextAttributesKey("MCB_FUNCTION_DECLARATION", DefaultLanguageHighlighterColors.FUNCTION_DECLARATION);
+    public static final TextAttributesKey VARIABLE_DECLARATION = createTextAttributesKey("MCB_VARIABLE_DECLARATION", DefaultLanguageHighlighterColors.LOCAL_VARIABLE);
+    public static final TextAttributesKey STRUCT_DECLARATION = createTextAttributesKey("MCB_STRUCT_DECLARATION", DefaultLanguageHighlighterColors.CLASS_NAME);
+
     private static final List<IElementType> KEYWORDS = List.of(
             MCBasicTypes.KEYWORD_IF,
             MCBasicTypes.KEYWORD_ELSE,
@@ -73,9 +77,6 @@ public class MCBasicSyntaxHighlighter extends SyntaxHighlighterBase {
 
     @Override
     public TextAttributesKey @NotNull [] getTokenHighlights(IElementType tokenType) {
-        if (tokenType.equals(MCBasicTypes.FUNCTION_CALL)) {
-            return new TextAttributesKey[]{DefaultLanguageHighlighterColors.FUNCTION_CALL};
-        }
         if (tokenType.equals(MCBasicTypes.STRING_LITERAL)) {
             return new TextAttributesKey[]{DefaultLanguageHighlighterColors.STRING};
         }

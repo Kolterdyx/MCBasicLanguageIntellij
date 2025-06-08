@@ -28,17 +28,31 @@ statement ::= variableDeclaration
                 | execStatement
                 | structDeclaration
                 | expressionStatement
-
 // STATEMENT
 
 private blockStatement ::= PUNCTUATION_LBRACE statement* PUNCTUATION_RBRACE
 private importStatement ::= KEYWORD_IMPORT (OP_MULTIPLY | IDENTIFIER (KEYWORD_AS IDENTIFIER)?) KEYWORD_FROM STRING_LITERAL PUNCTUATION_SEMICOLON
-private variableDeclaration ::= KEYWORD_LET IDENTIFIER type OP_ASSIGN expression PUNCTUATION_SEMICOLON
+variableDeclaration ::= KEYWORD_LET IDENTIFIER type OP_ASSIGN expression PUNCTUATION_SEMICOLON
+{
+  mixin="me.kolterdyx.mcbasiclanguage.psi.impl.MCBasicNamedElementImpl"
+  implements="me.kolterdyx.mcbasiclanguage.psi.MCBasicNamedElement"
+  methods=[getName setName getNameIdentifier]
+}
 private ifStatement ::= KEYWORD_IF PUNCTUATION_LPAREN expression PUNCTUATION_RPAREN blockStatement (KEYWORD_ELSE blockStatement | ifStatement)?
-private functionDeclaration ::= KEYWORD_FUNC IDENTIFIER PUNCTUATION_LPAREN parameterList? PUNCTUATION_RPAREN blockStatement
+functionDeclaration ::= KEYWORD_FUNC IDENTIFIER PUNCTUATION_LPAREN parameterList? PUNCTUATION_RPAREN blockStatement
+{
+  mixin="me.kolterdyx.mcbasiclanguage.psi.impl.MCBasicNamedElementImpl"
+  implements="me.kolterdyx.mcbasiclanguage.psi.MCBasicNamedElement"
+  methods=[getName setName getNameIdentifier]
+}
 private returnStatement ::= KEYWORD_RETURN expression? PUNCTUATION_SEMICOLON
 private execStatement ::= KEYWORD_EXEC expression PUNCTUATION_SEMICOLON
-private structDeclaration ::= KEYWORD_STRUCT IDENTIFIER PUNCTUATION_LBRACE structField* PUNCTUATION_RBRACE
+structDeclaration ::= KEYWORD_STRUCT IDENTIFIER PUNCTUATION_LBRACE structField* PUNCTUATION_RBRACE
+{
+  mixin="me.kolterdyx.mcbasiclanguage.psi.impl.MCBasicNamedElementImpl"
+  implements="me.kolterdyx.mcbasiclanguage.psi.MCBasicNamedElement"
+  methods=[getName setName getNameIdentifier]
+}
 private expressionStatement ::= expression PUNCTUATION_SEMICOLON
 
 
@@ -54,7 +68,12 @@ private additive ::= multiplicative (ADDITIVE_OPERATORS multiplicative)*
 private multiplicative ::= unary (MULTIPLICATIVE_OPERATORS unary)*
 private unary ::= (UNARY_OPERATORS unary) | value
 private value ::= baseValue (postFix*)?
-private baseValue ::= IDENTIFIER | primary
+baseValue ::= IDENTIFIER | primary
+{
+  mixin="me.kolterdyx.mcbasiclanguage.psi.impl.MCBasicNamedElementImpl"
+  implements="me.kolterdyx.mcbasiclanguage.psi.MCBasicNamedElement"
+  methods=[getName setName getNameIdentifier]
+}
 private postFix ::= arrayAccess | functionCall | memberAccess
 private primary ::= literal | PUNCTUATION_LPAREN expression PUNCTUATION_RPAREN
 
@@ -63,8 +82,8 @@ private primary ::= literal | PUNCTUATION_LPAREN expression PUNCTUATION_RPAREN
 
 
 private arrayAccess ::= PUNCTUATION_LBRACKET expression PUNCTUATION_RBRACKET
-functionCall ::= PUNCTUATION_LPAREN argumentList? PUNCTUATION_RPAREN
-memberAccess ::= PUNCTUATION_DOT IDENTIFIER
+private functionCall ::= PUNCTUATION_LPAREN argumentList? PUNCTUATION_RPAREN
+private memberAccess ::= PUNCTUATION_DOT IDENTIFIER
 
 private parameterList ::= IDENTIFIER (PUNCTUATION_COMMA IDENTIFIER)* PUNCTUATION_COMMA?
 private argumentList ::= expression (PUNCTUATION_COMMA expression)* PUNCTUATION_COMMA?
@@ -105,6 +124,7 @@ private MULTIPLICATIVE_OPERATORS ::= OP_MULTIPLY
 private UNARY_OPERATORS ::= OP_NOT
                              | OP_MINUS
 
+/*
 OP_EQUAL ::= "=="
 OP_NOT_EQUAL ::= "!="
 OP_LESS ::= "<"
@@ -116,9 +136,10 @@ OP_MINUS ::= "-"
 OP_MULTIPLY ::= "*"
 OP_DIVIDE ::= "/"
 OP_MODULO ::= "%"
-
+*/
 // PUNCTUATION
 
+/*
 PUNCTUATION_COMMA ::= ","
 PUNCTUATION_SEMICOLON ::= ";"
 PUNCTUATION_LPAREN ::= "("
@@ -128,3 +149,4 @@ PUNCTUATION_RBRACE ::= "}"
 PUNCTUATION_LBRACKET ::= "["
 PUNCTUATION_RBRACKET ::= "]"
 PUNCTUATION_DOT ::= "."
+*/

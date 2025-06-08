@@ -35,6 +35,8 @@
     <lang.parserDefinition language="MCBasic" implementationClass="me.kolterdyx.mcbasiclanguage.MCBasicParserDefinition"/>
     <lang.syntaxHighlighterFactory language="MCBasic"
                                    implementationClass="me.kolterdyx.mcbasiclanguage.MCBasicSyntaxHighlighterFactory"/>
+    <psi.referenceContributor language="MCBasic" implementation="me.kolterdyx.mcbasiclanguage.MCBasicReferenceContributor"/>
+    <annotator language="MCBasic" implementationClass="me.kolterdyx.mcbasiclanguage.MCBasicAnnotator"/>
   </extensions>
 
 </idea-plugin>

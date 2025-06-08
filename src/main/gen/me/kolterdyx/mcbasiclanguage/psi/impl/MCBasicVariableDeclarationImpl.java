@@ -8,17 +8,16 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static me.kolterdyx.mcbasiclanguage.psi.MCBasicTypes.*;
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import me.kolterdyx.mcbasiclanguage.psi.*;
 
-public class MCBasicStatementImpl extends ASTWrapperPsiElement implements MCBasicStatement {
+public class MCBasicVariableDeclarationImpl extends MCBasicNamedElementImpl implements MCBasicVariableDeclaration {
 
-  public MCBasicStatementImpl(@NotNull ASTNode node) {
+  public MCBasicVariableDeclarationImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull MCBasicVisitor visitor) {
-    visitor.visitStatement(this);
+    visitor.visitVariableDeclaration(this);
   }
 
   @Override
@@ -34,27 +33,18 @@ public class MCBasicStatementImpl extends ASTWrapperPsiElement implements MCBasi
   }
 
   @Override
-  @Nullable
-  public MCBasicFunctionDeclaration getFunctionDeclaration() {
-    return findChildByClass(MCBasicFunctionDeclaration.class);
+  public String getName() {
+    return MCBasicPsiImplUtil.getName(this);
   }
 
   @Override
-  @NotNull
-  public List<MCBasicStatement> getStatementList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, MCBasicStatement.class);
+  public PsiElement setName(String newName) {
+    return MCBasicPsiImplUtil.setName(this, newName);
   }
 
   @Override
-  @Nullable
-  public MCBasicStructDeclaration getStructDeclaration() {
-    return findChildByClass(MCBasicStructDeclaration.class);
-  }
-
-  @Override
-  @Nullable
-  public MCBasicVariableDeclaration getVariableDeclaration() {
-    return findChildByClass(MCBasicVariableDeclaration.class);
+  public PsiElement getNameIdentifier() {
+    return MCBasicPsiImplUtil.getNameIdentifier(this);
   }
 
 }

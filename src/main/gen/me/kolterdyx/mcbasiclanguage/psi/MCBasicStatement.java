@@ -8,69 +8,18 @@ import com.intellij.psi.PsiElement;
 public interface MCBasicStatement extends PsiElement {
 
   @NotNull
-  List<MCBasicOpDivide> getOpDivideList();
-
-  @NotNull
-  List<MCBasicOpEqual> getOpEqualList();
-
-  @NotNull
-  List<MCBasicOpGreater> getOpGreaterList();
-
-  @NotNull
-  List<MCBasicOpGreaterEqual> getOpGreaterEqualList();
-
-  @NotNull
-  List<MCBasicOpLess> getOpLessList();
-
-  @NotNull
-  List<MCBasicOpLessEqual> getOpLessEqualList();
-
-  @NotNull
-  List<MCBasicOpMinus> getOpMinusList();
-
-  @NotNull
-  List<MCBasicOpModulo> getOpModuloList();
-
-  @NotNull
-  List<MCBasicOpMultiply> getOpMultiplyList();
-
-  @NotNull
-  List<MCBasicOpNotEqual> getOpNotEqualList();
-
-  @NotNull
-  List<MCBasicOpPlus> getOpPlusList();
-
-  @NotNull
-  List<MCBasicPunctuationComma> getPunctuationCommaList();
-
-  @NotNull
-  List<MCBasicPunctuationLbrace> getPunctuationLbraceList();
-
-  @NotNull
-  List<MCBasicPunctuationLbracket> getPunctuationLbracketList();
-
-  @NotNull
-  List<MCBasicPunctuationLparen> getPunctuationLparenList();
-
-  @NotNull
-  List<MCBasicPunctuationRbrace> getPunctuationRbraceList();
-
-  @NotNull
-  List<MCBasicPunctuationRbracket> getPunctuationRbracketList();
-
-  @NotNull
-  List<MCBasicPunctuationRparen> getPunctuationRparenList();
+  List<MCBasicBaseValue> getBaseValueList();
 
   @Nullable
-  MCBasicPunctuationSemicolon getPunctuationSemicolon();
-
-  @NotNull
-  List<MCBasicFunctionCall> getFunctionCallList();
-
-  @NotNull
-  List<MCBasicMemberAccess> getMemberAccessList();
+  MCBasicFunctionDeclaration getFunctionDeclaration();
 
   @NotNull
   List<MCBasicStatement> getStatementList();
+
+  @Nullable
+  MCBasicStructDeclaration getStructDeclaration();
+
+  @Nullable
+  MCBasicVariableDeclaration getVariableDeclaration();
 
 }

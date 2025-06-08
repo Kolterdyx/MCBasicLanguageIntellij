@@ -7,95 +7,27 @@ import com.intellij.psi.PsiElement;
 
 public class MCBasicVisitor extends PsiElementVisitor {
 
-  public void visitOpDivide(@NotNull MCBasicOpDivide o) {
-    visitPsiElement(o);
+  public void visitBaseValue(@NotNull MCBasicBaseValue o) {
+    visitNamedElement(o);
   }
 
-  public void visitOpEqual(@NotNull MCBasicOpEqual o) {
-    visitPsiElement(o);
-  }
-
-  public void visitOpGreater(@NotNull MCBasicOpGreater o) {
-    visitPsiElement(o);
-  }
-
-  public void visitOpGreaterEqual(@NotNull MCBasicOpGreaterEqual o) {
-    visitPsiElement(o);
-  }
-
-  public void visitOpLess(@NotNull MCBasicOpLess o) {
-    visitPsiElement(o);
-  }
-
-  public void visitOpLessEqual(@NotNull MCBasicOpLessEqual o) {
-    visitPsiElement(o);
-  }
-
-  public void visitOpMinus(@NotNull MCBasicOpMinus o) {
-    visitPsiElement(o);
-  }
-
-  public void visitOpModulo(@NotNull MCBasicOpModulo o) {
-    visitPsiElement(o);
-  }
-
-  public void visitOpMultiply(@NotNull MCBasicOpMultiply o) {
-    visitPsiElement(o);
-  }
-
-  public void visitOpNotEqual(@NotNull MCBasicOpNotEqual o) {
-    visitPsiElement(o);
-  }
-
-  public void visitOpPlus(@NotNull MCBasicOpPlus o) {
-    visitPsiElement(o);
-  }
-
-  public void visitPunctuationComma(@NotNull MCBasicPunctuationComma o) {
-    visitPsiElement(o);
-  }
-
-  public void visitPunctuationDot(@NotNull MCBasicPunctuationDot o) {
-    visitPsiElement(o);
-  }
-
-  public void visitPunctuationLbrace(@NotNull MCBasicPunctuationLbrace o) {
-    visitPsiElement(o);
-  }
-
-  public void visitPunctuationLbracket(@NotNull MCBasicPunctuationLbracket o) {
-    visitPsiElement(o);
-  }
-
-  public void visitPunctuationLparen(@NotNull MCBasicPunctuationLparen o) {
-    visitPsiElement(o);
-  }
-
-  public void visitPunctuationRbrace(@NotNull MCBasicPunctuationRbrace o) {
-    visitPsiElement(o);
-  }
-
-  public void visitPunctuationRbracket(@NotNull MCBasicPunctuationRbracket o) {
-    visitPsiElement(o);
-  }
-
-  public void visitPunctuationRparen(@NotNull MCBasicPunctuationRparen o) {
-    visitPsiElement(o);
-  }
-
-  public void visitPunctuationSemicolon(@NotNull MCBasicPunctuationSemicolon o) {
-    visitPsiElement(o);
-  }
-
-  public void visitFunctionCall(@NotNull MCBasicFunctionCall o) {
-    visitPsiElement(o);
-  }
-
-  public void visitMemberAccess(@NotNull MCBasicMemberAccess o) {
-    visitPsiElement(o);
+  public void visitFunctionDeclaration(@NotNull MCBasicFunctionDeclaration o) {
+    visitNamedElement(o);
   }
 
   public void visitStatement(@NotNull MCBasicStatement o) {
+    visitPsiElement(o);
+  }
+
+  public void visitStructDeclaration(@NotNull MCBasicStructDeclaration o) {
+    visitNamedElement(o);
+  }
+
+  public void visitVariableDeclaration(@NotNull MCBasicVariableDeclaration o) {
+    visitNamedElement(o);
+  }
+
+  public void visitNamedElement(@NotNull MCBasicNamedElement o) {
     visitPsiElement(o);
   }
 

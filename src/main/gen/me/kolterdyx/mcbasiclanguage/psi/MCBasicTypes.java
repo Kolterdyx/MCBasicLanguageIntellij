@@ -8,29 +8,11 @@ import me.kolterdyx.mcbasiclanguage.psi.impl.*;
 
 public interface MCBasicTypes {
 
-  IElementType FUNCTION_CALL = new MCBasicElementType("FUNCTION_CALL");
-  IElementType MEMBER_ACCESS = new MCBasicElementType("MEMBER_ACCESS");
-  IElementType OP_DIVIDE = new MCBasicElementType("OP_DIVIDE");
-  IElementType OP_EQUAL = new MCBasicElementType("OP_EQUAL");
-  IElementType OP_GREATER = new MCBasicElementType("OP_GREATER");
-  IElementType OP_GREATER_EQUAL = new MCBasicElementType("OP_GREATER_EQUAL");
-  IElementType OP_LESS = new MCBasicElementType("OP_LESS");
-  IElementType OP_LESS_EQUAL = new MCBasicElementType("OP_LESS_EQUAL");
-  IElementType OP_MINUS = new MCBasicElementType("OP_MINUS");
-  IElementType OP_MODULO = new MCBasicElementType("OP_MODULO");
-  IElementType OP_MULTIPLY = new MCBasicElementType("OP_MULTIPLY");
-  IElementType OP_NOT_EQUAL = new MCBasicElementType("OP_NOT_EQUAL");
-  IElementType OP_PLUS = new MCBasicElementType("OP_PLUS");
-  IElementType PUNCTUATION_COMMA = new MCBasicElementType("PUNCTUATION_COMMA");
-  IElementType PUNCTUATION_DOT = new MCBasicElementType("PUNCTUATION_DOT");
-  IElementType PUNCTUATION_LBRACE = new MCBasicElementType("PUNCTUATION_LBRACE");
-  IElementType PUNCTUATION_LBRACKET = new MCBasicElementType("PUNCTUATION_LBRACKET");
-  IElementType PUNCTUATION_LPAREN = new MCBasicElementType("PUNCTUATION_LPAREN");
-  IElementType PUNCTUATION_RBRACE = new MCBasicElementType("PUNCTUATION_RBRACE");
-  IElementType PUNCTUATION_RBRACKET = new MCBasicElementType("PUNCTUATION_RBRACKET");
-  IElementType PUNCTUATION_RPAREN = new MCBasicElementType("PUNCTUATION_RPAREN");
-  IElementType PUNCTUATION_SEMICOLON = new MCBasicElementType("PUNCTUATION_SEMICOLON");
+  IElementType BASE_VALUE = new MCBasicElementType("BASE_VALUE");
+  IElementType FUNCTION_DECLARATION = new MCBasicElementType("FUNCTION_DECLARATION");
   IElementType STATEMENT = new MCBasicElementType("STATEMENT");
+  IElementType STRUCT_DECLARATION = new MCBasicElementType("STRUCT_DECLARATION");
+  IElementType VARIABLE_DECLARATION = new MCBasicElementType("VARIABLE_DECLARATION");
 
   IElementType COMMENT = new MCBasicTokenType("COMMENT");
   IElementType DOUBLE_LITERAL = new MCBasicTokenType("DOUBLE_LITERAL");
@@ -53,82 +35,48 @@ public interface MCBasicTypes {
   IElementType NEWLINE = new MCBasicTokenType("NEWLINE");
   IElementType OP_AND = new MCBasicTokenType("OP_AND");
   IElementType OP_ASSIGN = new MCBasicTokenType("OP_ASSIGN");
+  IElementType OP_DIVIDE = new MCBasicTokenType("OP_DIVIDE");
+  IElementType OP_EQUAL = new MCBasicTokenType("OP_EQUAL");
+  IElementType OP_GREATER = new MCBasicTokenType("OP_GREATER");
+  IElementType OP_GREATER_EQUAL = new MCBasicTokenType("OP_GREATER_EQUAL");
+  IElementType OP_LESS = new MCBasicTokenType("OP_LESS");
+  IElementType OP_LESS_EQUAL = new MCBasicTokenType("OP_LESS_EQUAL");
+  IElementType OP_MINUS = new MCBasicTokenType("OP_MINUS");
+  IElementType OP_MODULO = new MCBasicTokenType("OP_MODULO");
+  IElementType OP_MULTIPLY = new MCBasicTokenType("OP_MULTIPLY");
   IElementType OP_NOT = new MCBasicTokenType("OP_NOT");
+  IElementType OP_NOT_EQUAL = new MCBasicTokenType("OP_NOT_EQUAL");
   IElementType OP_OR = new MCBasicTokenType("OP_OR");
+  IElementType OP_PLUS = new MCBasicTokenType("OP_PLUS");
+  IElementType PUNCTUATION_COMMA = new MCBasicTokenType("PUNCTUATION_COMMA");
+  IElementType PUNCTUATION_DOT = new MCBasicTokenType("PUNCTUATION_DOT");
+  IElementType PUNCTUATION_LBRACE = new MCBasicTokenType("PUNCTUATION_LBRACE");
+  IElementType PUNCTUATION_LBRACKET = new MCBasicTokenType("PUNCTUATION_LBRACKET");
+  IElementType PUNCTUATION_LPAREN = new MCBasicTokenType("PUNCTUATION_LPAREN");
+  IElementType PUNCTUATION_RBRACE = new MCBasicTokenType("PUNCTUATION_RBRACE");
+  IElementType PUNCTUATION_RBRACKET = new MCBasicTokenType("PUNCTUATION_RBRACKET");
+  IElementType PUNCTUATION_RPAREN = new MCBasicTokenType("PUNCTUATION_RPAREN");
+  IElementType PUNCTUATION_SEMICOLON = new MCBasicTokenType("PUNCTUATION_SEMICOLON");
   IElementType STRING_LITERAL = new MCBasicTokenType("STRING_LITERAL");
   IElementType TRUE_LITERAL = new MCBasicTokenType("TRUE_LITERAL");
 
   class Factory {
     public static PsiElement createElement(ASTNode node) {
       IElementType type = node.getElementType();
-      if (type == FUNCTION_CALL) {
-        return new MCBasicFunctionCallImpl(node);
+      if (type == BASE_VALUE) {
+        return new MCBasicBaseValueImpl(node);
       }
-      else if (type == MEMBER_ACCESS) {
-        return new MCBasicMemberAccessImpl(node);
-      }
-      else if (type == OP_DIVIDE) {
-        return new MCBasicOpDivideImpl(node);
-      }
-      else if (type == OP_EQUAL) {
-        return new MCBasicOpEqualImpl(node);
-      }
-      else if (type == OP_GREATER) {
-        return new MCBasicOpGreaterImpl(node);
-      }
-      else if (type == OP_GREATER_EQUAL) {
-        return new MCBasicOpGreaterEqualImpl(node);
-      }
-      else if (type == OP_LESS) {
-        return new MCBasicOpLessImpl(node);
-      }
-      else if (type == OP_LESS_EQUAL) {
-        return new MCBasicOpLessEqualImpl(node);
-      }
-      else if (type == OP_MINUS) {
-        return new MCBasicOpMinusImpl(node);
-      }
-      else if (type == OP_MODULO) {
-        return new MCBasicOpModuloImpl(node);
-      }
-      else if (type == OP_MULTIPLY) {
-        return new MCBasicOpMultiplyImpl(node);
-      }
-      else if (type == OP_NOT_EQUAL) {
-        return new MCBasicOpNotEqualImpl(node);
-      }
-      else if (type == OP_PLUS) {
-        return new MCBasicOpPlusImpl(node);
-      }
-      else if (type == PUNCTUATION_COMMA) {
-        return new MCBasicPunctuationCommaImpl(node);
-      }
-      else if (type == PUNCTUATION_DOT) {
-        return new MCBasicPunctuationDotImpl(node);
-      }
-      else if (type == PUNCTUATION_LBRACE) {
-        return new MCBasicPunctuationLbraceImpl(node);
-      }
-      else if (type == PUNCTUATION_LBRACKET) {
-        return new MCBasicPunctuationLbracketImpl(node);
-      }
-      else if (type == PUNCTUATION_LPAREN) {
-        return new MCBasicPunctuationLparenImpl(node);
-      }
-      else if (type == PUNCTUATION_RBRACE) {
-        return new MCBasicPunctuationRbraceImpl(node);
-      }
-      else if (type == PUNCTUATION_RBRACKET) {
-        return new MCBasicPunctuationRbracketImpl(node);
-      }
-      else if (type == PUNCTUATION_RPAREN) {
-        return new MCBasicPunctuationRparenImpl(node);
-      }
-      else if (type == PUNCTUATION_SEMICOLON) {
-        return new MCBasicPunctuationSemicolonImpl(node);
+      else if (type == FUNCTION_DECLARATION) {
+        return new MCBasicFunctionDeclarationImpl(node);
       }
       else if (type == STATEMENT) {
         return new MCBasicStatementImpl(node);
+      }
+      else if (type == STRUCT_DECLARATION) {
+        return new MCBasicStructDeclarationImpl(node);
+      }
+      else if (type == VARIABLE_DECLARATION) {
+        return new MCBasicVariableDeclarationImpl(node);
       }
       throw new AssertionError("Unknown element type: " + type);
     }
