@@ -5,12 +5,6 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface MCBasicStructDeclaration extends MCBasicNamedElement {
-
-  String getName();
-
-  PsiElement setName(String newName);
-
-  PsiElement getNameIdentifier();
+public interface MCBasicStructDeclaration extends PsiElement {
 
 }

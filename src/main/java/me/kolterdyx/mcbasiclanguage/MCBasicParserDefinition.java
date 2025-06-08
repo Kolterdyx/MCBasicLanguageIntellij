@@ -37,7 +37,7 @@ final class MCBasicParserDefinition implements ParserDefinition {
   @NotNull
   @Override
   public TokenSet getStringLiteralElements() {
-    return TokenSet.EMPTY;
+    return MCBasicTokenSets.STRINGS;
   }
 
   @NotNull

@@ -8,11 +8,13 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static me.kolterdyx.mcbasiclanguage.psi.MCBasicTypes.*;
+import me.kolterdyx.mcbasiclanguage.psi.MCBasicNamedElement;
+import me.kolterdyx.mcbasiclanguage.psi.stubs.FunctionStub;
 import me.kolterdyx.mcbasiclanguage.psi.*;
 
-public class MCBasicFunctionDeclarationImpl extends MCBasicNamedElementImpl implements MCBasicFunctionDeclaration {
+public class MCBasicFunctionDeclarationImpl extends MCBasicNamedElement<FunctionStub> implements MCBasicFunctionDeclaration {
 
-  public MCBasicFunctionDeclarationImpl(@NotNull ASTNode node) {
+  public MCBasicFunctionDeclarationImpl(ASTNode node) {
     super(node);
   }
 
@@ -30,21 +32,6 @@ public class MCBasicFunctionDeclarationImpl extends MCBasicNamedElementImpl impl
   @NotNull
   public List<MCBasicStatement> getStatementList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, MCBasicStatement.class);
-  }
-
-  @Override
-  public String getName() {
-    return MCBasicPsiImplUtil.getName(this);
-  }
-
-  @Override
-  public PsiElement setName(String newName) {
-    return MCBasicPsiImplUtil.setName(this, newName);
-  }
-
-  @Override
-  public PsiElement getNameIdentifier() {
-    return MCBasicPsiImplUtil.getNameIdentifier(this);
   }
 
 }

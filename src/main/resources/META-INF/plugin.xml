@@ -30,13 +30,33 @@
   <vendor url="https://cirogarcia.dev">Ciro García Belmonte</vendor>
 
   <extensions defaultExtensionNs="com.intellij">
-    <fileType name="MCBasic File" implementationClass="me.kolterdyx.mcbasiclanguage.MCBasicFileType" fieldName="INSTANCE"
-              language="MCBasic" extensions="mcb"/>
-    <lang.parserDefinition language="MCBasic" implementationClass="me.kolterdyx.mcbasiclanguage.MCBasicParserDefinition"/>
-    <lang.syntaxHighlighterFactory language="MCBasic"
-                                   implementationClass="me.kolterdyx.mcbasiclanguage.MCBasicSyntaxHighlighterFactory"/>
-    <psi.referenceContributor language="MCBasic" implementation="me.kolterdyx.mcbasiclanguage.MCBasicReferenceContributor"/>
-    <annotator language="MCBasic" implementationClass="me.kolterdyx.mcbasiclanguage.MCBasicAnnotator"/>
+    <fileType
+            name="MCBasic File"
+            implementationClass="me.kolterdyx.mcbasiclanguage.MCBasicFileType"
+            fieldName="INSTANCE"
+            language="MCBasic"
+            extensions="mcb"/>
+    <lang.parserDefinition
+            language="MCBasic"
+            implementationClass="me.kolterdyx.mcbasiclanguage.MCBasicParserDefinition"/>
+    <lang.syntaxHighlighterFactory
+            language="MCBasic"
+            implementationClass="me.kolterdyx.mcbasiclanguage.MCBasicSyntaxHighlighterFactory"/>
+    <annotator
+            language="MCBasic"
+            implementationClass="me.kolterdyx.mcbasiclanguage.MCBasicAnnotator"/>
+    <lang.refactoringSupport
+            language="MCBasic"
+            implementationClass="me.kolterdyx.mcbasiclanguage.MCBasicRefactoringSupportProvider"/>
+    <lang.findUsagesProvider
+            language="MCBasic"
+            implementationClass="me.kolterdyx.mcbasiclanguage.MCBasicFindUsagesProvider"/>
+    <psi.referenceContributor
+            language="MCBasic"
+            implementation="me.kolterdyx.mcbasiclanguage.MCBasicReferenceContributor"/>
+    <codeInsight.lineMarkerProvider
+            language="MCBasic"
+            implementationClass="me.kolterdyx.mcbasiclanguage.MCBasicLineMarkerProvider"/>
   </extensions>
 
 </idea-plugin>

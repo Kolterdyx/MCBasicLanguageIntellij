@@ -1,42 +1,43 @@
-// Copyright 2000-2022 JetBrains s.r.o. and other contributors. Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
 
 package me.kolterdyx.mcbasiclanguage.psi;
 
 import com.intellij.openapi.project.Project;
-import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFileFactory;
 import me.kolterdyx.mcbasiclanguage.MCBasicFileType;
-import org.jetbrains.annotations.NotNull;
 
 public class MCBasicElementFactory {
 
-  public static MCBasicFile createFile(Project project, String text) {
-    String name = "dummy.mcb";
-    return (MCBasicFile) PsiFileFactory.getInstance(project).createFileFromText(name, MCBasicFileType.INSTANCE, text);
-  }
+    public static MCBasicFile createFile(Project project, String text) {
+        String name = "dummy.mcb";
+        return (MCBasicFile) PsiFileFactory.getInstance(project).createFileFromText(name, MCBasicFileType.INSTANCE, text);
+    }
 
-  public static MCBasicFunctionDeclaration createFunction(Project project, String name) {
-    MCBasicFile file = createFile(project, name);
-    return (MCBasicFunctionDeclaration) file.getFirstChild();
-  }
+    public static MCBasicFunctionDeclaration createFunction(Project project, String name) {
+        MCBasicFile file = createFile(project, "func " + name + "() {}");
+        var child = file.getFirstChild().getNode().findChildByType(MCBasicTypes.FUNCTION_DECLARATION);
+        if (child == null) {
+            return null;
+        }
+
+        return (MCBasicFunctionDeclaration) MCBasicNameIndex.registerElement(name, (MCBasicFunctionDeclaration) child.getPsi());
+    }
 
     public static MCBasicVariableDeclaration createVariable(Project project, String name) {
-        MCBasicFile file = createFile(project, name);
-        return (MCBasicVariableDeclaration) file.getFirstChild();
+        MCBasicFile file = createFile(project, "let " + name + " int = 0");
+        var child = file.getFirstChild().getNode().findChildByType(MCBasicTypes.VARIABLE_DECLARATION);
+        if (child == null) {
+            return null;
+        }
+        return (MCBasicVariableDeclaration) MCBasicNameIndex.registerElement(name, (MCBasicVariableDeclaration) child.getPsi());
     }
 
     public static MCBasicStructDeclaration createStruct(Project project, String name) {
-        MCBasicFile file = createFile(project, name);
-        return (MCBasicStructDeclaration) file.getFirstChild();
+        MCBasicFile file = createFile(project, "struct " + name + " { }");
+        var child = file.getFirstChild().getNode().findChildByType(MCBasicTypes.STRUCT_DECLARATION);
+        if (child == null) {
+            return null;
+        }
+        return (MCBasicStructDeclaration) MCBasicNameIndex.registerElement(name, (MCBasicStructDeclaration) child.getPsi());
     }
 
-    public static MCBasicBaseValue createBaseValue(@NotNull Project project, String newName) {
-        MCBasicFile file = createFile(project, newName);
-        PsiElement firstChild = file.getFirstChild();
-        if (firstChild instanceof MCBasicBaseValue) {
-            return (MCBasicBaseValue) firstChild;
-        } else {
-            throw new IllegalArgumentException("The first child is not a valid MCBasicBaseValue");
-        }
-    }
 }

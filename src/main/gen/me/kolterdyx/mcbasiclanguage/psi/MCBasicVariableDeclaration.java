@@ -5,15 +5,9 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface MCBasicVariableDeclaration extends MCBasicNamedElement {
+public interface MCBasicVariableDeclaration extends PsiElement {
 
   @NotNull
   List<MCBasicBaseValue> getBaseValueList();
-
-  String getName();
-
-  PsiElement setName(String newName);
-
-  PsiElement getNameIdentifier();
 
 }
