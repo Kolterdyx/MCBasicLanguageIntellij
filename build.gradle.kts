@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "me.kolterdyx"
-version = "0.0.1"
+version = "0.1.0"
 
 // Include the generated files in the source set
 sourceSets {
