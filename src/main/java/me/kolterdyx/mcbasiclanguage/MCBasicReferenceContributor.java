@@ -1,14 +1,11 @@
 package me.kolterdyx.mcbasiclanguage;
 
-import com.intellij.openapi.util.TextRange;
 import com.intellij.patterns.PlatformPatterns;
 import com.intellij.psi.*;
 import com.intellij.util.ProcessingContext;
 import me.kolterdyx.mcbasiclanguage.psi.MCBasicBaseValue;
-import me.kolterdyx.mcbasiclanguage.psi.MCBasicFunctionDeclaration;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Objects;
 
 public class MCBasicReferenceContributor extends PsiReferenceContributor {
     @Override
