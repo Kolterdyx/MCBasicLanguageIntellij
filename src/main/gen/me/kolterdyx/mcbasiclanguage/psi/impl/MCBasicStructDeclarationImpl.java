@@ -8,10 +8,9 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static me.kolterdyx.mcbasiclanguage.psi.MCBasicTypes.*;
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import me.kolterdyx.mcbasiclanguage.psi.*;
 
-public class MCBasicStructDeclarationImpl extends ASTWrapperPsiElement implements MCBasicStructDeclaration {
+public class MCBasicStructDeclarationImpl extends MCBasicNamedElementImpl implements MCBasicStructDeclaration {
 
   public MCBasicStructDeclarationImpl(@NotNull ASTNode node) {
     super(node);
@@ -25,6 +24,21 @@ public class MCBasicStructDeclarationImpl extends ASTWrapperPsiElement implement
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof MCBasicVisitor) accept((MCBasicVisitor)visitor);
     else super.accept(visitor);
+  }
+
+  @Override
+  public String getName() {
+    return MCBasicPsiImplUtil.getName(this);
+  }
+
+  @Override
+  public PsiElement setName(String newName) {
+    return MCBasicPsiImplUtil.setName(this, newName);
+  }
+
+  @Override
+  public PsiElement getNameIdentifier() {
+    return MCBasicPsiImplUtil.getNameIdentifier(this);
   }
 
 }

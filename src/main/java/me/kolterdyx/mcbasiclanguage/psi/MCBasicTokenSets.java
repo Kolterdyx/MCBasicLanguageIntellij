@@ -28,15 +28,6 @@ public interface MCBasicTokenSets {
             MCBasicTypes.INTEGER_LITERAL,
             MCBasicTypes.DOUBLE_LITERAL
     );
-
-    TokenSet STRINGS = TokenSet.create(
-            MCBasicTypes.STRING_LITERAL
-    );
-
-    TokenSet IDENTIFIERS = TokenSet.create(
-            MCBasicTypes.IDENTIFIER
-    );
-
     TokenSet COMMENTS = TokenSet.create(MCBasicTypes.COMMENT);
 
 }

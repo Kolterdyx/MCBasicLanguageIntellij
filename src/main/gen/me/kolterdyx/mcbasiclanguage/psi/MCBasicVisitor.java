@@ -4,18 +4,15 @@ package me.kolterdyx.mcbasiclanguage.psi;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.StubBasedPsiElement;
-import me.kolterdyx.mcbasiclanguage.psi.stubs.FunctionStub;
 
 public class MCBasicVisitor extends PsiElementVisitor {
 
   public void visitBaseValue(@NotNull MCBasicBaseValue o) {
-    visitPsiElement(o);
+    visitNamedElement(o);
   }
 
   public void visitFunctionDeclaration(@NotNull MCBasicFunctionDeclaration o) {
     visitNamedElement(o);
-    // visitStubBasedPsiElement(o);
   }
 
   public void visitStatement(@NotNull MCBasicStatement o) {
@@ -23,11 +20,11 @@ public class MCBasicVisitor extends PsiElementVisitor {
   }
 
   public void visitStructDeclaration(@NotNull MCBasicStructDeclaration o) {
-    visitPsiElement(o);
+    visitNamedElement(o);
   }
 
   public void visitVariableDeclaration(@NotNull MCBasicVariableDeclaration o) {
-    visitPsiElement(o);
+    visitNamedElement(o);
   }
 
   public void visitNamedElement(@NotNull MCBasicNamedElement o) {

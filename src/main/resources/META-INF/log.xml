@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<log>
-    <logger name="me.kolterdyx.mcbasiclanguage" level="DEBUG"/>
-    <root level="DEBUG">
-        <appender-ref ref="CONSOLE"/>
-        <appender-ref ref="FILE"/>
-    </root>
-</log>

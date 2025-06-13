@@ -33,15 +33,26 @@ statement ::= variableDeclaration
 private blockStatement ::= PUNCTUATION_LBRACE statement* PUNCTUATION_RBRACE
 private importStatement ::= KEYWORD_IMPORT (OP_MULTIPLY | IDENTIFIER (KEYWORD_AS IDENTIFIER)?) KEYWORD_FROM STRING_LITERAL PUNCTUATION_SEMICOLON
 variableDeclaration ::= KEYWORD_LET IDENTIFIER type OP_ASSIGN expression PUNCTUATION_SEMICOLON
+{
+  mixin="me.kolterdyx.mcbasiclanguage.psi.impl.MCBasicNamedElementImpl"
+  implements="me.kolterdyx.mcbasiclanguage.psi.MCBasicNamedElement"
+  methods=[getName setName getNameIdentifier]
+}
 private ifStatement ::= KEYWORD_IF PUNCTUATION_LPAREN expression PUNCTUATION_RPAREN blockStatement (KEYWORD_ELSE blockStatement | ifStatement)?
 functionDeclaration ::= KEYWORD_FUNC IDENTIFIER PUNCTUATION_LPAREN parameterList? PUNCTUATION_RPAREN blockStatement
 {
-  implements=["me.kolterdyx.mcbasiclanguage.psi.MCBasicNamedElement" "com.intellij.psi.StubBasedPsiElement<me.kolterdyx.mcbasiclanguage.psi.stubs.FunctionStub>"]
-  mixin="me.kolterdyx.mcbasiclanguage.psi.MCBasicNamedElement<me.kolterdyx.mcbasiclanguage.psi.stubs.FunctionStub>"
+  mixin="me.kolterdyx.mcbasiclanguage.psi.impl.MCBasicNamedElementImpl"
+  implements="me.kolterdyx.mcbasiclanguage.psi.MCBasicNamedElement"
+  methods=[getName setName getNameIdentifier]
 }
 private returnStatement ::= KEYWORD_RETURN expression? PUNCTUATION_SEMICOLON
 private execStatement ::= KEYWORD_EXEC expression PUNCTUATION_SEMICOLON
 structDeclaration ::= KEYWORD_STRUCT IDENTIFIER PUNCTUATION_LBRACE structField* PUNCTUATION_RBRACE
+{
+  mixin="me.kolterdyx.mcbasiclanguage.psi.impl.MCBasicNamedElementImpl"
+  implements="me.kolterdyx.mcbasiclanguage.psi.MCBasicNamedElement"
+  methods=[getName setName getNameIdentifier]
+}
 private expressionStatement ::= expression PUNCTUATION_SEMICOLON
 
 
@@ -58,6 +69,11 @@ private multiplicative ::= unary (MULTIPLICATIVE_OPERATORS unary)*
 private unary ::= (UNARY_OPERATORS unary) | value
 private value ::= baseValue (postFix*)?
 baseValue ::= IDENTIFIER | primary
+{
+  mixin="me.kolterdyx.mcbasiclanguage.psi.impl.MCBasicNamedElementImpl"
+  implements="me.kolterdyx.mcbasiclanguage.psi.MCBasicNamedElement"
+  methods=[getName setName getNameIdentifier]
+}
 private postFix ::= arrayAccess | functionCall | memberAccess
 private primary ::= literal | PUNCTUATION_LPAREN expression PUNCTUATION_RPAREN
 
