@@ -55,9 +55,9 @@ DecDouble = [0-9]*\.[0-9]+([eE][+-]?[0-9]+)?
     ">="                            { yybegin(YYINITIAL); return MCBasicTypes.OP_GREATER_EQUAL; }
     "+"                             { yybegin(YYINITIAL); return MCBasicTypes.OP_PLUS; }
     "-"                             { yybegin(YYINITIAL); return MCBasicTypes.OP_MINUS; }
-    "*"                             { yybegin(YYINITIAL); return MCBasicTypes.OP_MULTIPLY; }
-    "/"                             { yybegin(YYINITIAL); return MCBasicTypes.OP_DIVIDE; }
-    "%"                             { yybegin(YYINITIAL); return MCBasicTypes.OP_MODULO; }
+    "*"                             { yybegin(YYINITIAL); return MCBasicTypes.OP_STAR; }
+    "/"                             { yybegin(YYINITIAL); return MCBasicTypes.OP_SLASH; }
+    "%"                             { yybegin(YYINITIAL); return MCBasicTypes.OP_PERCENT; }
     "and"                           { yybegin(YYINITIAL); return MCBasicTypes.OP_AND; }
     "or"                            { yybegin(YYINITIAL); return MCBasicTypes.OP_OR; }
     "!"                             { yybegin(YYINITIAL); return MCBasicTypes.OP_NOT; }
@@ -82,12 +82,12 @@ DecDouble = [0-9]*\.[0-9]+([eE][+-]?[0-9]+)?
     /* punctuation */
     ","                             { yybegin(YYINITIAL); return MCBasicTypes.PUNCTUATION_COMMA; }
     ";"                             { yybegin(YYINITIAL); return MCBasicTypes.PUNCTUATION_SEMICOLON; }
-    "("                             { yybegin(YYINITIAL); return MCBasicTypes.PUNCTUATION_LPAREN; }
-    ")"                             { yybegin(YYINITIAL); return MCBasicTypes.PUNCTUATION_RPAREN; }
-    "{"                             { yybegin(YYINITIAL); return MCBasicTypes.PUNCTUATION_LBRACE; }
-    "}"                             { yybegin(YYINITIAL); return MCBasicTypes.PUNCTUATION_RBRACE; }
-    "["                             { yybegin(YYINITIAL); return MCBasicTypes.PUNCTUATION_LBRACKET; }
-    "]"                             { yybegin(YYINITIAL); return MCBasicTypes.PUNCTUATION_RBRACKET; }
+    "("                             { yybegin(YYINITIAL); return MCBasicTypes.PUNCTUATION_PAREN_OPEN; }
+    ")"                             { yybegin(YYINITIAL); return MCBasicTypes.PUNCTUATION_PAREN_CLOSE; }
+    "{"                             { yybegin(YYINITIAL); return MCBasicTypes.PUNCTUATION_BRACE_OPEN; }
+    "}"                             { yybegin(YYINITIAL); return MCBasicTypes.PUNCTUATION_BRACE_CLOSE; }
+    "["                             { yybegin(YYINITIAL); return MCBasicTypes.PUNCTUATION_BRACKET_OPEN; }
+    "]"                             { yybegin(YYINITIAL); return MCBasicTypes.PUNCTUATION_BRACKET_CLOSE; }
     "."                             { yybegin(YYINITIAL); return MCBasicTypes.PUNCTUATION_DOT; }
 }
 

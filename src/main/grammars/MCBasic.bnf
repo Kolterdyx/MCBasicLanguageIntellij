@@ -1,4 +1,49 @@
+
+
 {
+
+  tokens = [
+    KEYWORD_FUNC="func"
+    KEYWORD_STRUCT="struct"
+    KEYWORD_LET="let"
+    KEYWORD_RETURN="return"
+    KEYWORD_IF="if"
+    KEYWORD_ELSE="else"
+    KEYWORD_EXEC="exec"
+    KEYWORD_IMPORT="import"
+    KEYWORD_FROM="from"
+    KEYWORD_AS="as"
+    KEYWORD_INT="int"
+    KEYWORD_STR="str"
+    KEYWORD_DOUBLE="double"
+
+    OP_ASSIGN="="
+    OP_EQUAL="=="
+    OP_NOT_EQUAL="!="
+    OP_LESS="<"
+    OP_LESS_EQUAL="<="
+    OP_GREATER=">"
+    OP_GREATER_EQUAL=">="
+    OP_PLUS="+"
+    OP_MINUS="-"
+    OP_STAR="*"
+    OP_SLASH="/"
+    OP_PERCENT="%"
+    OP_AND="and"
+    OP_OR="or"
+    OP_NOT="!"
+
+    PUNCTUATION_SEMICOLON=";"
+    PUNCTUATION_PAREN_OPEN="("
+    PUNCTUATION_PAREN_CLOSE=")"
+    PUNCTUATION_BRACE_OPEN="{"
+    PUNCTUATION_BRACE_CLOSE="}"
+    PUNCTUATION_BRACKET_OPEN="["
+    PUNCTUATION_BRACKET_CLOSE="]"
+    PUNCTUATION_DOT="."
+    PUNCTUATION_COMMA=","
+  ]
+
   parserClass="me.kolterdyx.mcbasiclanguage.parser.MCBasicParser"
 
   extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
@@ -13,7 +58,10 @@
   tokenTypeClass="me.kolterdyx.mcbasiclanguage.psi.MCBasicTokenType"
 
   psiImplUtilClass="me.kolterdyx.mcbasiclanguage.psi.impl.MCBasicPsiImplUtil"
+
+
 }
+
 
 mcbasicFile ::= item_*
 
@@ -124,29 +172,47 @@ private MULTIPLICATIVE_OPERATORS ::= OP_MULTIPLY
 private UNARY_OPERATORS ::= OP_NOT
                              | OP_MINUS
 
-/*
-OP_EQUAL ::= "=="
-OP_NOT_EQUAL ::= "!="
-OP_LESS ::= "<"
-OP_GREATER ::= ">"
-OP_LESS_EQUAL ::= "<="
-OP_GREATER_EQUAL ::= ">="
-OP_PLUS ::= "+"
-OP_MINUS ::= "-"
-OP_MULTIPLY ::= "*"
-OP_DIVIDE ::= "/"
-OP_MODULO ::= "%"
-*/
+
+
+private KEYWORD_FUNC ::= "func"
+private KEYWORD_LET ::= "let"
+private KEYWORD_RETURN ::= "return"
+private KEYWORD_IF ::= "if"
+private KEYWORD_ELSE ::= "else"
+private KEYWORD_EXEC ::= "exec"
+private KEYWORD_IMPORT ::= "import"
+private KEYWORD_AS ::= "as"
+private KEYWORD_FROM ::= "from"
+private KEYWORD_STRUCT ::= "struct"
+private KEYWORD_INT ::= "int"
+private KEYWORD_STR ::= "str"
+private KEYWORD_DOUBLE ::= "double"
+
+
+private OP_EQUAL ::= "=="
+private OP_NOT_EQUAL ::= "!="
+private OP_LESS ::= "<"
+private OP_GREATER ::= ">"
+private OP_LESS_EQUAL ::= "<="
+private OP_GREATER_EQUAL ::= ">="
+private OP_PLUS ::= "+"
+private OP_MINUS ::= "-"
+private OP_MULTIPLY ::= "*"
+private OP_DIVIDE ::= "/"
+private OP_MODULO ::= "%"
+private OP_NOT ::= "!"
+private OP_AND ::= "and"
+private OP_OR ::= "or"
+private OP_ASSIGN ::= "="
 // PUNCTUATION
 
-/*
-PUNCTUATION_COMMA ::= ","
-PUNCTUATION_SEMICOLON ::= ";"
-PUNCTUATION_LPAREN ::= "("
-PUNCTUATION_RPAREN ::= ")"
-PUNCTUATION_LBRACE ::= "{"
-PUNCTUATION_RBRACE ::= "}"
-PUNCTUATION_LBRACKET ::= "["
-PUNCTUATION_RBRACKET ::= "]"
-PUNCTUATION_DOT ::= "."
-*/
+
+private PUNCTUATION_COMMA ::= ","
+private PUNCTUATION_SEMICOLON ::= ";"
+private PUNCTUATION_LPAREN ::= "("
+private PUNCTUATION_RPAREN ::= ")"
+private PUNCTUATION_LBRACE ::= "{"
+private PUNCTUATION_RBRACE ::= "}"
+private PUNCTUATION_LBRACKET ::= "["
+private PUNCTUATION_RBRACKET ::= "]"
+private PUNCTUATION_DOT ::= "."
