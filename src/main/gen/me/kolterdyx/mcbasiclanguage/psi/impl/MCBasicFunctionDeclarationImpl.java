@@ -27,6 +27,12 @@ public class MCBasicFunctionDeclarationImpl extends MCBasicNamedElementImpl impl
   }
 
   @Override
+  @Nullable
+  public MCBasicIdentifierType getIdentifierType() {
+    return findChildByClass(MCBasicIdentifierType.class);
+  }
+
+  @Override
   @NotNull
   public List<MCBasicParameter> getParameterList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, MCBasicParameter.class);

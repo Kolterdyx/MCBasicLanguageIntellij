@@ -614,7 +614,7 @@ public class MCBasicParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // IDENTIFIER PUNCTUATION_LPAREN parameterList? PUNCTUATION_RPAREN blockStatement
+  // IDENTIFIER PUNCTUATION_LPAREN parameterList? PUNCTUATION_RPAREN type? blockStatement
   public static boolean functionDeclaration(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "functionDeclaration")) return false;
     if (!nextTokenIs(b, IDENTIFIER)) return false;
@@ -624,6 +624,7 @@ public class MCBasicParser implements PsiParser, LightPsiParser {
     r = r && PUNCTUATION_LPAREN(b, l + 1);
     r = r && functionDeclaration_2(b, l + 1);
     r = r && PUNCTUATION_RPAREN(b, l + 1);
+    r = r && functionDeclaration_4(b, l + 1);
     r = r && blockStatement(b, l + 1);
     exit_section_(b, m, FUNCTION_DECLARATION, r);
     return r;
@@ -633,6 +634,13 @@ public class MCBasicParser implements PsiParser, LightPsiParser {
   private static boolean functionDeclaration_2(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "functionDeclaration_2")) return false;
     parameterList(b, l + 1);
+    return true;
+  }
+
+  // type?
+  private static boolean functionDeclaration_4(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "functionDeclaration_4")) return false;
+    type(b, l + 1);
     return true;
   }
 

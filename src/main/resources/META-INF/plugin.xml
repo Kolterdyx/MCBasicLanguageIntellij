@@ -17,7 +17,7 @@
     <![CDATA[
       MCBasic is a custom language designed for easily creating Minecraft datapacks.
       This plugin provides syntax highlighting and reference navigation for MCBasic files (.mcb).
-      It is intended to be used in conjunction with the <a href="https://github.com/Kolterdyx/mcbasic">MCBasic compiler</a>, which translates MCBasic code into Minecraft datapacks.
+      It is intended to be used in conjunction with the <a target="_blank" href="https://github.com/Kolterdyx/mcbasic">MCBasic compiler</a>, which translates MCBasic code into Minecraft datapacks.
     ]]>
   </description>
   <change-notes>

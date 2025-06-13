@@ -87,7 +87,7 @@ variableDeclaration ::= IDENTIFIER type OP_ASSIGN expression PUNCTUATION_SEMICOL
   methods=[getName setName getNameIdentifier]
 }
 private ifStatement ::= KEYWORD_IF PUNCTUATION_LPAREN expression PUNCTUATION_RPAREN blockStatement (KEYWORD_ELSE blockStatement | ifStatement)?
-functionDeclaration ::= IDENTIFIER PUNCTUATION_LPAREN parameterList? PUNCTUATION_RPAREN blockStatement
+functionDeclaration ::= IDENTIFIER PUNCTUATION_LPAREN parameterList? PUNCTUATION_RPAREN type? blockStatement
 {
   mixin="me.kolterdyx.mcbasiclanguage.psi.impl.MCBasicNamedElementImpl"
   implements="me.kolterdyx.mcbasiclanguage.psi.MCBasicNamedElement"

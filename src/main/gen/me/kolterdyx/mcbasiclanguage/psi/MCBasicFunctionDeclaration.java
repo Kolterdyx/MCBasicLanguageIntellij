@@ -7,6 +7,9 @@ import com.intellij.psi.PsiElement;
 
 public interface MCBasicFunctionDeclaration extends MCBasicNamedElement {
 
+  @Nullable
+  MCBasicIdentifierType getIdentifierType();
+
   @NotNull
   List<MCBasicParameter> getParameterList();
 
