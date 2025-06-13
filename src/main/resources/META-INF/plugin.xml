@@ -11,12 +11,11 @@
 
   <!-- Product and plugin compatibility requirements -->
   <depends>com.intellij.modules.platform</depends>
-  <depends>com.intellij.java</depends>
 
   <!-- Text to display as description on Settings | Plugin page -->
   <description>
     <![CDATA[
-      MCBasic is a custom language designed for easily creating Minecraft datapacks
+      MCBasic is a custom language designed for easily creating Minecraft datapacks. This plugin provides syntax highlighting and reference navigation for MCBasic files (.mcb). It is intended to be used in conjunction with the MCBasic compiler, which translates MCBasic code into Minecraft datapacks.
     ]]>
   </description>
   <change-notes>
@@ -30,13 +29,29 @@
   <vendor url="https://cirogarcia.dev">Ciro García Belmonte</vendor>
 
   <extensions defaultExtensionNs="com.intellij">
-    <fileType name="MCBasic File" implementationClass="me.kolterdyx.mcbasiclanguage.MCBasicFileType" fieldName="INSTANCE"
-              language="MCBasic" extensions="mcb"/>
-    <lang.parserDefinition language="MCBasic" implementationClass="me.kolterdyx.mcbasiclanguage.MCBasicParserDefinition"/>
-    <lang.syntaxHighlighterFactory language="MCBasic"
-                                   implementationClass="me.kolterdyx.mcbasiclanguage.MCBasicSyntaxHighlighterFactory"/>
-    <annotator language="MCBasic" implementationClass="me.kolterdyx.mcbasiclanguage.MCBasicAnnotator"/>
-    <lang.findUsagesProvider language="MCBasic" implementationClass="me.kolterdyx.mcbasiclanguage.MCBasicFindUsagesProvider"/>
+    <fileType
+            name="MCBasic File"
+            implementationClass="me.kolterdyx.mcbasiclanguage.MCBasicFileType"
+            fieldName="INSTANCE"
+            language="MCBasic"
+            extensions="mcb"
+    />
+    <lang.parserDefinition
+            language="MCBasic"
+            implementationClass="me.kolterdyx.mcbasiclanguage.MCBasicParserDefinition"
+    />
+    <lang.syntaxHighlighterFactory
+            language="MCBasic"
+            implementationClass="me.kolterdyx.mcbasiclanguage.MCBasicSyntaxHighlighterFactory"
+    />
+    <annotator
+            language="MCBasic"
+            implementationClass="me.kolterdyx.mcbasiclanguage.MCBasicAnnotator"
+    />
+    <lang.findUsagesProvider
+            language="MCBasic"
+            implementationClass="me.kolterdyx.mcbasiclanguage.MCBasicFindUsagesProvider"
+    />
   </extensions>
 
 </idea-plugin>
