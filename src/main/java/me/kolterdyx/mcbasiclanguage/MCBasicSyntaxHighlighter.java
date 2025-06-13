@@ -1,4 +1,3 @@
-// Copyright 2000-2022 JetBrains s.r.o. and other contributors. Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
 
 package me.kolterdyx.mcbasiclanguage;
 
@@ -86,13 +85,13 @@ public class MCBasicSyntaxHighlighter extends SyntaxHighlighterBase {
         if (tokenType.equals(MCBasicTypes.DOUBLE_LITERAL)) {
             return new TextAttributesKey[]{DefaultLanguageHighlighterColors.NUMBER};
         }
-        if (tokenType.equals(MCBasicTypes.PUNCTUATION_RBRACE) || tokenType.equals(MCBasicTypes.PUNCTUATION_LBRACE)) {
+        if (tokenType.equals(MCBasicTypes.PUNCTUATION_BRACE_CLOSE) || tokenType.equals(MCBasicTypes.PUNCTUATION_BRACE_OPEN)) {
             return BRACE_KEYS;
         }
-        if (tokenType.equals(MCBasicTypes.PUNCTUATION_RBRACKET) || tokenType.equals(MCBasicTypes.PUNCTUATION_LBRACKET)) {
+        if (tokenType.equals(MCBasicTypes.PUNCTUATION_BRACKET_CLOSE) || tokenType.equals(MCBasicTypes.PUNCTUATION_BRACKET_OPEN)) {
             return BRACKET_KEYS;
         }
-        if (tokenType.equals(MCBasicTypes.PUNCTUATION_RPAREN) || tokenType.equals(MCBasicTypes.PUNCTUATION_LPAREN)) {
+        if (tokenType.equals(MCBasicTypes.PUNCTUATION_PAREN_CLOSE) || tokenType.equals(MCBasicTypes.PUNCTUATION_PAREN_OPEN)) {
             return PAREN_KEYS;
         }
         if (KEYWORDS.contains(tokenType)) {

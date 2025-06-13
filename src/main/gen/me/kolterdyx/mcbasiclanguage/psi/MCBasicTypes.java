@@ -10,6 +10,8 @@ public interface MCBasicTypes {
 
   IElementType BASE_VALUE = new MCBasicElementType("BASE_VALUE");
   IElementType FUNCTION_DECLARATION = new MCBasicElementType("FUNCTION_DECLARATION");
+  IElementType IDENTIFIER_TYPE = new MCBasicElementType("IDENTIFIER_TYPE");
+  IElementType PARAMETER = new MCBasicElementType("PARAMETER");
   IElementType STATEMENT = new MCBasicElementType("STATEMENT");
   IElementType STRUCT_DECLARATION = new MCBasicElementType("STRUCT_DECLARATION");
   IElementType VARIABLE_DECLARATION = new MCBasicElementType("VARIABLE_DECLARATION");
@@ -19,44 +21,44 @@ public interface MCBasicTypes {
   IElementType FALSE_LITERAL = new MCBasicTokenType("FALSE_LITERAL");
   IElementType IDENTIFIER = new MCBasicTokenType("IDENTIFIER");
   IElementType INTEGER_LITERAL = new MCBasicTokenType("INTEGER_LITERAL");
-  IElementType KEYWORD_AS = new MCBasicTokenType("KEYWORD_AS");
-  IElementType KEYWORD_DOUBLE = new MCBasicTokenType("KEYWORD_DOUBLE");
-  IElementType KEYWORD_ELSE = new MCBasicTokenType("KEYWORD_ELSE");
-  IElementType KEYWORD_EXEC = new MCBasicTokenType("KEYWORD_EXEC");
-  IElementType KEYWORD_FROM = new MCBasicTokenType("KEYWORD_FROM");
-  IElementType KEYWORD_FUNC = new MCBasicTokenType("KEYWORD_FUNC");
-  IElementType KEYWORD_IF = new MCBasicTokenType("KEYWORD_IF");
-  IElementType KEYWORD_IMPORT = new MCBasicTokenType("KEYWORD_IMPORT");
-  IElementType KEYWORD_INT = new MCBasicTokenType("KEYWORD_INT");
-  IElementType KEYWORD_LET = new MCBasicTokenType("KEYWORD_LET");
-  IElementType KEYWORD_RETURN = new MCBasicTokenType("KEYWORD_RETURN");
-  IElementType KEYWORD_STR = new MCBasicTokenType("KEYWORD_STR");
-  IElementType KEYWORD_STRUCT = new MCBasicTokenType("KEYWORD_STRUCT");
+  IElementType KEYWORD_AS = new MCBasicTokenType("as");
+  IElementType KEYWORD_DOUBLE = new MCBasicTokenType("double");
+  IElementType KEYWORD_ELSE = new MCBasicTokenType("else");
+  IElementType KEYWORD_EXEC = new MCBasicTokenType("exec");
+  IElementType KEYWORD_FROM = new MCBasicTokenType("from");
+  IElementType KEYWORD_FUNC = new MCBasicTokenType("func");
+  IElementType KEYWORD_IF = new MCBasicTokenType("if");
+  IElementType KEYWORD_IMPORT = new MCBasicTokenType("import");
+  IElementType KEYWORD_INT = new MCBasicTokenType("int");
+  IElementType KEYWORD_LET = new MCBasicTokenType("let");
+  IElementType KEYWORD_RETURN = new MCBasicTokenType("return");
+  IElementType KEYWORD_STR = new MCBasicTokenType("str");
+  IElementType KEYWORD_STRUCT = new MCBasicTokenType("struct");
   IElementType NEWLINE = new MCBasicTokenType("NEWLINE");
-  IElementType OP_AND = new MCBasicTokenType("OP_AND");
-  IElementType OP_ASSIGN = new MCBasicTokenType("OP_ASSIGN");
-  IElementType OP_DIVIDE = new MCBasicTokenType("OP_DIVIDE");
-  IElementType OP_EQUAL = new MCBasicTokenType("OP_EQUAL");
-  IElementType OP_GREATER = new MCBasicTokenType("OP_GREATER");
-  IElementType OP_GREATER_EQUAL = new MCBasicTokenType("OP_GREATER_EQUAL");
-  IElementType OP_LESS = new MCBasicTokenType("OP_LESS");
-  IElementType OP_LESS_EQUAL = new MCBasicTokenType("OP_LESS_EQUAL");
-  IElementType OP_MINUS = new MCBasicTokenType("OP_MINUS");
-  IElementType OP_MODULO = new MCBasicTokenType("OP_MODULO");
-  IElementType OP_MULTIPLY = new MCBasicTokenType("OP_MULTIPLY");
-  IElementType OP_NOT = new MCBasicTokenType("OP_NOT");
-  IElementType OP_NOT_EQUAL = new MCBasicTokenType("OP_NOT_EQUAL");
-  IElementType OP_OR = new MCBasicTokenType("OP_OR");
-  IElementType OP_PLUS = new MCBasicTokenType("OP_PLUS");
-  IElementType PUNCTUATION_COMMA = new MCBasicTokenType("PUNCTUATION_COMMA");
-  IElementType PUNCTUATION_DOT = new MCBasicTokenType("PUNCTUATION_DOT");
-  IElementType PUNCTUATION_LBRACE = new MCBasicTokenType("PUNCTUATION_LBRACE");
-  IElementType PUNCTUATION_LBRACKET = new MCBasicTokenType("PUNCTUATION_LBRACKET");
-  IElementType PUNCTUATION_LPAREN = new MCBasicTokenType("PUNCTUATION_LPAREN");
-  IElementType PUNCTUATION_RBRACE = new MCBasicTokenType("PUNCTUATION_RBRACE");
-  IElementType PUNCTUATION_RBRACKET = new MCBasicTokenType("PUNCTUATION_RBRACKET");
-  IElementType PUNCTUATION_RPAREN = new MCBasicTokenType("PUNCTUATION_RPAREN");
-  IElementType PUNCTUATION_SEMICOLON = new MCBasicTokenType("PUNCTUATION_SEMICOLON");
+  IElementType OP_AND = new MCBasicTokenType("and");
+  IElementType OP_ASSIGN = new MCBasicTokenType("=");
+  IElementType OP_EQUAL = new MCBasicTokenType("==");
+  IElementType OP_GREATER = new MCBasicTokenType(">");
+  IElementType OP_GREATER_EQUAL = new MCBasicTokenType(">=");
+  IElementType OP_LESS = new MCBasicTokenType("<");
+  IElementType OP_LESS_EQUAL = new MCBasicTokenType("<=");
+  IElementType OP_MINUS = new MCBasicTokenType("-");
+  IElementType OP_NOT = new MCBasicTokenType("!");
+  IElementType OP_NOT_EQUAL = new MCBasicTokenType("!=");
+  IElementType OP_OR = new MCBasicTokenType("or");
+  IElementType OP_PERCENT = new MCBasicTokenType("%");
+  IElementType OP_PLUS = new MCBasicTokenType("+");
+  IElementType OP_SLASH = new MCBasicTokenType("/");
+  IElementType OP_STAR = new MCBasicTokenType("*");
+  IElementType PUNCTUATION_BRACE_CLOSE = new MCBasicTokenType("}");
+  IElementType PUNCTUATION_BRACE_OPEN = new MCBasicTokenType("{");
+  IElementType PUNCTUATION_BRACKET_CLOSE = new MCBasicTokenType("]");
+  IElementType PUNCTUATION_BRACKET_OPEN = new MCBasicTokenType("[");
+  IElementType PUNCTUATION_COMMA = new MCBasicTokenType(",");
+  IElementType PUNCTUATION_DOT = new MCBasicTokenType(".");
+  IElementType PUNCTUATION_PAREN_CLOSE = new MCBasicTokenType(")");
+  IElementType PUNCTUATION_PAREN_OPEN = new MCBasicTokenType("(");
+  IElementType PUNCTUATION_SEMICOLON = new MCBasicTokenType(";");
   IElementType STRING_LITERAL = new MCBasicTokenType("STRING_LITERAL");
   IElementType TRUE_LITERAL = new MCBasicTokenType("TRUE_LITERAL");
 
@@ -68,6 +70,12 @@ public interface MCBasicTypes {
       }
       else if (type == FUNCTION_DECLARATION) {
         return new MCBasicFunctionDeclarationImpl(node);
+      }
+      else if (type == IDENTIFIER_TYPE) {
+        return new MCBasicIdentifierTypeImpl(node);
+      }
+      else if (type == PARAMETER) {
+        return new MCBasicParameterImpl(node);
       }
       else if (type == STATEMENT) {
         return new MCBasicStatementImpl(node);

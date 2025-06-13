@@ -27,6 +27,12 @@ public class MCBasicStructDeclarationImpl extends MCBasicNamedElementImpl implem
   }
 
   @Override
+  @NotNull
+  public List<MCBasicIdentifierType> getIdentifierTypeList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, MCBasicIdentifierType.class);
+  }
+
+  @Override
   public String getName() {
     return MCBasicPsiImplUtil.getName(this);
   }

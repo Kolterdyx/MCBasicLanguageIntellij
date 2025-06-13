@@ -10,26 +10,20 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static me.kolterdyx.mcbasiclanguage.psi.MCBasicTypes.*;
 import me.kolterdyx.mcbasiclanguage.psi.*;
 
-public class MCBasicVariableDeclarationImpl extends MCBasicNamedElementImpl implements MCBasicVariableDeclaration {
+public class MCBasicParameterImpl extends MCBasicNamedElementImpl implements MCBasicParameter {
 
-  public MCBasicVariableDeclarationImpl(@NotNull ASTNode node) {
+  public MCBasicParameterImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull MCBasicVisitor visitor) {
-    visitor.visitVariableDeclaration(this);
+    visitor.visitParameter(this);
   }
 
   @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof MCBasicVisitor) accept((MCBasicVisitor)visitor);
     else super.accept(visitor);
-  }
-
-  @Override
-  @NotNull
-  public List<MCBasicBaseValue> getBaseValueList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, MCBasicBaseValue.class);
   }
 
   @Override

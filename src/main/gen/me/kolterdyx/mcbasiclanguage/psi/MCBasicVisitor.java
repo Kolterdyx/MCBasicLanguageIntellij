@@ -8,10 +8,18 @@ import com.intellij.psi.PsiElement;
 public class MCBasicVisitor extends PsiElementVisitor {
 
   public void visitBaseValue(@NotNull MCBasicBaseValue o) {
-    visitNamedElement(o);
+    visitReference(o);
   }
 
   public void visitFunctionDeclaration(@NotNull MCBasicFunctionDeclaration o) {
+    visitNamedElement(o);
+  }
+
+  public void visitIdentifierType(@NotNull MCBasicIdentifierType o) {
+    visitReference(o);
+  }
+
+  public void visitParameter(@NotNull MCBasicParameter o) {
     visitNamedElement(o);
   }
 
@@ -28,6 +36,10 @@ public class MCBasicVisitor extends PsiElementVisitor {
   }
 
   public void visitNamedElement(@NotNull MCBasicNamedElement o) {
+    visitPsiElement(o);
+  }
+
+  public void visitReference(@NotNull MCBasicReference o) {
     visitPsiElement(o);
   }
 

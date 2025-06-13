@@ -7,6 +7,9 @@ import com.intellij.psi.PsiElement;
 
 public interface MCBasicStructDeclaration extends MCBasicNamedElement {
 
+  @NotNull
+  List<MCBasicIdentifierType> getIdentifierTypeList();
+
   String getName();
 
   PsiElement setName(String newName);

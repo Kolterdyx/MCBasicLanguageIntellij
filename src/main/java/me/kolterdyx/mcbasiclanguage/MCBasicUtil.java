@@ -1,7 +1,6 @@
 package me.kolterdyx.mcbasiclanguage;
 
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.roots.ProjectRootManager;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.psi.search.FileTypeIndex;
@@ -9,7 +8,6 @@ import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.util.PsiTreeUtil;
 import me.kolterdyx.mcbasiclanguage.psi.MCBasicFile;
 import me.kolterdyx.mcbasiclanguage.psi.MCBasicFunctionDeclaration;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collection;

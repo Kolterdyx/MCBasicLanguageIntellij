@@ -5,13 +5,10 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface MCBasicBaseValue extends MCBasicReference {
-
-  @NotNull
-  List<MCBasicBaseValue> getBaseValueList();
+public interface MCBasicIdentifierType extends MCBasicReference {
 
   //WARNING: getElement(...) is skipped
-  //matching getElement(MCBasicBaseValue, ...)
+  //matching getElement(MCBasicIdentifierType, ...)
   //methods are not found in MCBasicPsiImplUtil
 
 }

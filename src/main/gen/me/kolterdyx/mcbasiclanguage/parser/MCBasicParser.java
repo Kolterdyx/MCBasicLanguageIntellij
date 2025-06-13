@@ -42,8 +42,8 @@ public class MCBasicParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "ADDITIVE_OPERATORS")) return false;
     if (!nextTokenIs(b, "", OP_MINUS, OP_PLUS)) return false;
     boolean r;
-    r = consumeToken(b, OP_PLUS);
-    if (!r) r = consumeToken(b, OP_MINUS);
+    r = OP_PLUS(b, l + 1);
+    if (!r) r = OP_MINUS(b, l + 1);
     return r;
   }
 
@@ -54,21 +54,99 @@ public class MCBasicParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "EQ_OPERATORS")) return false;
     if (!nextTokenIs(b, "", OP_EQUAL, OP_NOT_EQUAL)) return false;
     boolean r;
-    r = consumeToken(b, OP_EQUAL);
-    if (!r) r = consumeToken(b, OP_NOT_EQUAL);
+    r = OP_EQUAL(b, l + 1);
+    if (!r) r = OP_NOT_EQUAL(b, l + 1);
     return r;
+  }
+
+  /* ********************************************************** */
+  // "as"
+  static boolean KEYWORD_AS(PsiBuilder b, int l) {
+    return consumeToken(b, KEYWORD_AS);
+  }
+
+  /* ********************************************************** */
+  // "double"
+  static boolean KEYWORD_DOUBLE(PsiBuilder b, int l) {
+    return consumeToken(b, KEYWORD_DOUBLE);
+  }
+
+  /* ********************************************************** */
+  // "else"
+  static boolean KEYWORD_ELSE(PsiBuilder b, int l) {
+    return consumeToken(b, KEYWORD_ELSE);
+  }
+
+  /* ********************************************************** */
+  // "exec"
+  static boolean KEYWORD_EXEC(PsiBuilder b, int l) {
+    return consumeToken(b, KEYWORD_EXEC);
+  }
+
+  /* ********************************************************** */
+  // "from"
+  static boolean KEYWORD_FROM(PsiBuilder b, int l) {
+    return consumeToken(b, KEYWORD_FROM);
+  }
+
+  /* ********************************************************** */
+  // "func"
+  static boolean KEYWORD_FUNC(PsiBuilder b, int l) {
+    return consumeToken(b, KEYWORD_FUNC);
+  }
+
+  /* ********************************************************** */
+  // "if"
+  static boolean KEYWORD_IF(PsiBuilder b, int l) {
+    return consumeToken(b, KEYWORD_IF);
+  }
+
+  /* ********************************************************** */
+  // "import"
+  static boolean KEYWORD_IMPORT(PsiBuilder b, int l) {
+    return consumeToken(b, KEYWORD_IMPORT);
+  }
+
+  /* ********************************************************** */
+  // "int"
+  static boolean KEYWORD_INT(PsiBuilder b, int l) {
+    return consumeToken(b, KEYWORD_INT);
+  }
+
+  /* ********************************************************** */
+  // "let"
+  static boolean KEYWORD_LET(PsiBuilder b, int l) {
+    return consumeToken(b, KEYWORD_LET);
+  }
+
+  /* ********************************************************** */
+  // "return"
+  static boolean KEYWORD_RETURN(PsiBuilder b, int l) {
+    return consumeToken(b, KEYWORD_RETURN);
+  }
+
+  /* ********************************************************** */
+  // "str"
+  static boolean KEYWORD_STR(PsiBuilder b, int l) {
+    return consumeToken(b, KEYWORD_STR);
+  }
+
+  /* ********************************************************** */
+  // "struct"
+  static boolean KEYWORD_STRUCT(PsiBuilder b, int l) {
+    return consumeToken(b, KEYWORD_STRUCT);
   }
 
   /* ********************************************************** */
   // PUNCTUATION_LBRACKET argumentList PUNCTUATION_RBRACKET
   static boolean LIST_LITERAL(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "LIST_LITERAL")) return false;
-    if (!nextTokenIs(b, PUNCTUATION_LBRACKET)) return false;
+    if (!nextTokenIs(b, PUNCTUATION_BRACKET_OPEN)) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeToken(b, PUNCTUATION_LBRACKET);
+    r = PUNCTUATION_LBRACKET(b, l + 1);
     r = r && argumentList(b, l + 1);
-    r = r && consumeToken(b, PUNCTUATION_RBRACKET);
+    r = r && PUNCTUATION_RBRACKET(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
@@ -80,10 +158,154 @@ public class MCBasicParser implements PsiParser, LightPsiParser {
   static boolean MULTIPLICATIVE_OPERATORS(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "MULTIPLICATIVE_OPERATORS")) return false;
     boolean r;
-    r = consumeToken(b, OP_MULTIPLY);
-    if (!r) r = consumeToken(b, OP_DIVIDE);
-    if (!r) r = consumeToken(b, OP_MODULO);
+    r = OP_MULTIPLY(b, l + 1);
+    if (!r) r = OP_DIVIDE(b, l + 1);
+    if (!r) r = OP_MODULO(b, l + 1);
     return r;
+  }
+
+  /* ********************************************************** */
+  // "and"
+  static boolean OP_AND(PsiBuilder b, int l) {
+    return consumeToken(b, OP_AND);
+  }
+
+  /* ********************************************************** */
+  // "="
+  static boolean OP_ASSIGN(PsiBuilder b, int l) {
+    return consumeToken(b, OP_ASSIGN);
+  }
+
+  /* ********************************************************** */
+  // "/"
+  static boolean OP_DIVIDE(PsiBuilder b, int l) {
+    return consumeToken(b, OP_SLASH);
+  }
+
+  /* ********************************************************** */
+  // "=="
+  static boolean OP_EQUAL(PsiBuilder b, int l) {
+    return consumeToken(b, OP_EQUAL);
+  }
+
+  /* ********************************************************** */
+  // ">"
+  static boolean OP_GREATER(PsiBuilder b, int l) {
+    return consumeToken(b, OP_GREATER);
+  }
+
+  /* ********************************************************** */
+  // ">="
+  static boolean OP_GREATER_EQUAL(PsiBuilder b, int l) {
+    return consumeToken(b, OP_GREATER_EQUAL);
+  }
+
+  /* ********************************************************** */
+  // "<"
+  static boolean OP_LESS(PsiBuilder b, int l) {
+    return consumeToken(b, OP_LESS);
+  }
+
+  /* ********************************************************** */
+  // "<="
+  static boolean OP_LESS_EQUAL(PsiBuilder b, int l) {
+    return consumeToken(b, OP_LESS_EQUAL);
+  }
+
+  /* ********************************************************** */
+  // "-"
+  static boolean OP_MINUS(PsiBuilder b, int l) {
+    return consumeToken(b, OP_MINUS);
+  }
+
+  /* ********************************************************** */
+  // "%"
+  static boolean OP_MODULO(PsiBuilder b, int l) {
+    return consumeToken(b, OP_PERCENT);
+  }
+
+  /* ********************************************************** */
+  // "*"
+  static boolean OP_MULTIPLY(PsiBuilder b, int l) {
+    return consumeToken(b, OP_STAR);
+  }
+
+  /* ********************************************************** */
+  // "!"
+  static boolean OP_NOT(PsiBuilder b, int l) {
+    return consumeToken(b, OP_NOT);
+  }
+
+  /* ********************************************************** */
+  // "!="
+  static boolean OP_NOT_EQUAL(PsiBuilder b, int l) {
+    return consumeToken(b, OP_NOT_EQUAL);
+  }
+
+  /* ********************************************************** */
+  // "or"
+  static boolean OP_OR(PsiBuilder b, int l) {
+    return consumeToken(b, OP_OR);
+  }
+
+  /* ********************************************************** */
+  // "+"
+  static boolean OP_PLUS(PsiBuilder b, int l) {
+    return consumeToken(b, OP_PLUS);
+  }
+
+  /* ********************************************************** */
+  // ","
+  static boolean PUNCTUATION_COMMA(PsiBuilder b, int l) {
+    return consumeToken(b, PUNCTUATION_COMMA);
+  }
+
+  /* ********************************************************** */
+  // "."
+  static boolean PUNCTUATION_DOT(PsiBuilder b, int l) {
+    return consumeToken(b, PUNCTUATION_DOT);
+  }
+
+  /* ********************************************************** */
+  // "{"
+  static boolean PUNCTUATION_LBRACE(PsiBuilder b, int l) {
+    return consumeToken(b, PUNCTUATION_BRACE_OPEN);
+  }
+
+  /* ********************************************************** */
+  // "["
+  static boolean PUNCTUATION_LBRACKET(PsiBuilder b, int l) {
+    return consumeToken(b, PUNCTUATION_BRACKET_OPEN);
+  }
+
+  /* ********************************************************** */
+  // "("
+  static boolean PUNCTUATION_LPAREN(PsiBuilder b, int l) {
+    return consumeToken(b, PUNCTUATION_PAREN_OPEN);
+  }
+
+  /* ********************************************************** */
+  // "}"
+  static boolean PUNCTUATION_RBRACE(PsiBuilder b, int l) {
+    return consumeToken(b, PUNCTUATION_BRACE_CLOSE);
+  }
+
+  /* ********************************************************** */
+  // "]"
+  static boolean PUNCTUATION_RBRACKET(PsiBuilder b, int l) {
+    return consumeToken(b, PUNCTUATION_BRACKET_CLOSE);
+  }
+
+  /* ********************************************************** */
+  // ")"
+  static boolean PUNCTUATION_RPAREN(PsiBuilder b, int l) {
+    return consumeToken(b, PUNCTUATION_PAREN_CLOSE);
+  }
+
+  /* ********************************************************** */
+  // ";"
+  static boolean PUNCTUATION_SEMICOLON(PsiBuilder b, int l) {
+    return consumeToken(b, PUNCTUATION_SEMICOLON);
   }
 
   /* ********************************************************** */
@@ -94,22 +316,37 @@ public class MCBasicParser implements PsiParser, LightPsiParser {
   static boolean RELATIONAL_OPERATORS(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "RELATIONAL_OPERATORS")) return false;
     boolean r;
-    r = consumeToken(b, OP_LESS);
-    if (!r) r = consumeToken(b, OP_GREATER);
-    if (!r) r = consumeToken(b, OP_LESS_EQUAL);
-    if (!r) r = consumeToken(b, OP_GREATER_EQUAL);
+    r = OP_LESS(b, l + 1);
+    if (!r) r = OP_GREATER(b, l + 1);
+    if (!r) r = OP_LESS_EQUAL(b, l + 1);
+    if (!r) r = OP_GREATER_EQUAL(b, l + 1);
     return r;
   }
 
   /* ********************************************************** */
   // OP_NOT
   //                              | OP_MINUS
+  // IDENTIFIER
   static boolean UNARY_OPERATORS(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "UNARY_OPERATORS")) return false;
     if (!nextTokenIs(b, "", OP_MINUS, OP_NOT)) return false;
     boolean r;
-    r = consumeToken(b, OP_NOT);
-    if (!r) r = consumeToken(b, OP_MINUS);
+    Marker m = enter_section_(b);
+    r = OP_NOT(b, l + 1);
+    if (!r) r = UNARY_OPERATORS_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // OP_MINUS
+  // IDENTIFIER
+  private static boolean UNARY_OPERATORS_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "UNARY_OPERATORS_1")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = OP_MINUS(b, l + 1);
+    r = r && consumeToken(b, IDENTIFIER);
+    exit_section_(b, m, null, r);
     return r;
   }
 
@@ -175,7 +412,7 @@ public class MCBasicParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "and_1_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeToken(b, OP_AND);
+    r = OP_AND(b, l + 1);
     r = r && equality(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
@@ -210,7 +447,7 @@ public class MCBasicParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "argumentList_1_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeToken(b, PUNCTUATION_COMMA);
+    r = PUNCTUATION_COMMA(b, l + 1);
     r = r && expression(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
@@ -219,7 +456,7 @@ public class MCBasicParser implements PsiParser, LightPsiParser {
   // PUNCTUATION_COMMA?
   private static boolean argumentList_2(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "argumentList_2")) return false;
-    consumeToken(b, PUNCTUATION_COMMA);
+    PUNCTUATION_COMMA(b, l + 1);
     return true;
   }
 
@@ -227,12 +464,12 @@ public class MCBasicParser implements PsiParser, LightPsiParser {
   // PUNCTUATION_LBRACKET expression PUNCTUATION_RBRACKET
   static boolean arrayAccess(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "arrayAccess")) return false;
-    if (!nextTokenIs(b, PUNCTUATION_LBRACKET)) return false;
+    if (!nextTokenIs(b, PUNCTUATION_BRACKET_OPEN)) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeToken(b, PUNCTUATION_LBRACKET);
+    r = PUNCTUATION_LBRACKET(b, l + 1);
     r = r && expression(b, l + 1);
-    r = r && consumeToken(b, PUNCTUATION_RBRACKET);
+    r = r && PUNCTUATION_RBRACKET(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
@@ -241,14 +478,14 @@ public class MCBasicParser implements PsiParser, LightPsiParser {
   // KEYWORD_INT
   //                      | KEYWORD_STR
   //                      | KEYWORD_DOUBLE
-  //                      | IDENTIFIER
+  //                      | identifierType
   static boolean baseType(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "baseType")) return false;
     boolean r;
-    r = consumeToken(b, KEYWORD_INT);
-    if (!r) r = consumeToken(b, KEYWORD_STR);
-    if (!r) r = consumeToken(b, KEYWORD_DOUBLE);
-    if (!r) r = consumeToken(b, IDENTIFIER);
+    r = KEYWORD_INT(b, l + 1);
+    if (!r) r = KEYWORD_STR(b, l + 1);
+    if (!r) r = KEYWORD_DOUBLE(b, l + 1);
+    if (!r) r = identifierType(b, l + 1);
     return r;
   }
 
@@ -268,12 +505,12 @@ public class MCBasicParser implements PsiParser, LightPsiParser {
   // PUNCTUATION_LBRACE statement* PUNCTUATION_RBRACE
   static boolean blockStatement(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "blockStatement")) return false;
-    if (!nextTokenIs(b, PUNCTUATION_LBRACE)) return false;
+    if (!nextTokenIs(b, PUNCTUATION_BRACE_OPEN)) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeToken(b, PUNCTUATION_LBRACE);
+    r = PUNCTUATION_LBRACE(b, l + 1);
     r = r && blockStatement_1(b, l + 1);
-    r = r && consumeToken(b, PUNCTUATION_RBRACE);
+    r = r && PUNCTUATION_RBRACE(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
@@ -330,9 +567,9 @@ public class MCBasicParser implements PsiParser, LightPsiParser {
     if (!nextTokenIs(b, KEYWORD_EXEC)) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeToken(b, KEYWORD_EXEC);
+    r = KEYWORD_EXEC(b, l + 1);
     r = r && expression(b, l + 1);
-    r = r && consumeToken(b, PUNCTUATION_SEMICOLON);
+    r = r && PUNCTUATION_SEMICOLON(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
@@ -350,7 +587,7 @@ public class MCBasicParser implements PsiParser, LightPsiParser {
     boolean r;
     Marker m = enter_section_(b);
     r = expression(b, l + 1);
-    r = r && consumeToken(b, PUNCTUATION_SEMICOLON);
+    r = r && PUNCTUATION_SEMICOLON(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
@@ -359,12 +596,12 @@ public class MCBasicParser implements PsiParser, LightPsiParser {
   // PUNCTUATION_LPAREN argumentList? PUNCTUATION_RPAREN
   static boolean functionCall(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "functionCall")) return false;
-    if (!nextTokenIs(b, PUNCTUATION_LPAREN)) return false;
+    if (!nextTokenIs(b, PUNCTUATION_PAREN_OPEN)) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeToken(b, PUNCTUATION_LPAREN);
+    r = PUNCTUATION_LPAREN(b, l + 1);
     r = r && functionCall_1(b, l + 1);
-    r = r && consumeToken(b, PUNCTUATION_RPAREN);
+    r = r && PUNCTUATION_RPAREN(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
@@ -377,25 +614,38 @@ public class MCBasicParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // KEYWORD_FUNC IDENTIFIER PUNCTUATION_LPAREN parameterList? PUNCTUATION_RPAREN blockStatement
+  // IDENTIFIER PUNCTUATION_LPAREN parameterList? PUNCTUATION_RPAREN blockStatement
   public static boolean functionDeclaration(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "functionDeclaration")) return false;
-    if (!nextTokenIs(b, KEYWORD_FUNC)) return false;
+    if (!nextTokenIs(b, IDENTIFIER)) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeTokens(b, 0, KEYWORD_FUNC, IDENTIFIER, PUNCTUATION_LPAREN);
-    r = r && functionDeclaration_3(b, l + 1);
-    r = r && consumeToken(b, PUNCTUATION_RPAREN);
+    r = consumeToken(b, IDENTIFIER);
+    r = r && PUNCTUATION_LPAREN(b, l + 1);
+    r = r && functionDeclaration_2(b, l + 1);
+    r = r && PUNCTUATION_RPAREN(b, l + 1);
     r = r && blockStatement(b, l + 1);
     exit_section_(b, m, FUNCTION_DECLARATION, r);
     return r;
   }
 
   // parameterList?
-  private static boolean functionDeclaration_3(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "functionDeclaration_3")) return false;
+  private static boolean functionDeclaration_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "functionDeclaration_2")) return false;
     parameterList(b, l + 1);
     return true;
+  }
+
+  /* ********************************************************** */
+  // IDENTIFIER
+  public static boolean identifierType(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "identifierType")) return false;
+    if (!nextTokenIs(b, IDENTIFIER)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, IDENTIFIER);
+    exit_section_(b, m, IDENTIFIER_TYPE, r);
+    return r;
   }
 
   /* ********************************************************** */
@@ -405,9 +655,10 @@ public class MCBasicParser implements PsiParser, LightPsiParser {
     if (!nextTokenIs(b, KEYWORD_IF)) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeTokens(b, 0, KEYWORD_IF, PUNCTUATION_LPAREN);
+    r = KEYWORD_IF(b, l + 1);
+    r = r && PUNCTUATION_LPAREN(b, l + 1);
     r = r && expression(b, l + 1);
-    r = r && consumeToken(b, PUNCTUATION_RPAREN);
+    r = r && PUNCTUATION_RPAREN(b, l + 1);
     r = r && blockStatement(b, l + 1);
     r = r && ifStatement_5(b, l + 1);
     exit_section_(b, m, null, r);
@@ -437,7 +688,7 @@ public class MCBasicParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "ifStatement_5_0_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeToken(b, KEYWORD_ELSE);
+    r = KEYWORD_ELSE(b, l + 1);
     r = r && blockStatement(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
@@ -450,9 +701,11 @@ public class MCBasicParser implements PsiParser, LightPsiParser {
     if (!nextTokenIs(b, KEYWORD_IMPORT)) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeToken(b, KEYWORD_IMPORT);
+    r = KEYWORD_IMPORT(b, l + 1);
     r = r && importStatement_1(b, l + 1);
-    r = r && consumeTokens(b, 0, KEYWORD_FROM, STRING_LITERAL, PUNCTUATION_SEMICOLON);
+    r = r && KEYWORD_FROM(b, l + 1);
+    r = r && consumeToken(b, STRING_LITERAL);
+    r = r && PUNCTUATION_SEMICOLON(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
@@ -462,7 +715,7 @@ public class MCBasicParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "importStatement_1")) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeToken(b, OP_MULTIPLY);
+    r = OP_MULTIPLY(b, l + 1);
     if (!r) r = importStatement_1_1(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
@@ -491,7 +744,8 @@ public class MCBasicParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "importStatement_1_1_1_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeTokens(b, 0, KEYWORD_AS, IDENTIFIER);
+    r = KEYWORD_AS(b, l + 1);
+    r = r && consumeToken(b, IDENTIFIER);
     exit_section_(b, m, null, r);
     return r;
   }
@@ -529,7 +783,8 @@ public class MCBasicParser implements PsiParser, LightPsiParser {
     boolean r;
     Marker m = enter_section_(b);
     r = baseType(b, l + 1);
-    r = r && consumeTokens(b, 0, PUNCTUATION_LBRACKET, PUNCTUATION_RBRACKET);
+    r = r && PUNCTUATION_LBRACKET(b, l + 1);
+    r = r && PUNCTUATION_RBRACKET(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
@@ -572,7 +827,8 @@ public class MCBasicParser implements PsiParser, LightPsiParser {
     if (!nextTokenIs(b, PUNCTUATION_DOT)) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeTokens(b, 0, PUNCTUATION_DOT, IDENTIFIER);
+    r = PUNCTUATION_DOT(b, l + 1);
+    r = r && consumeToken(b, IDENTIFIER);
     exit_section_(b, m, null, r);
     return r;
   }
@@ -639,27 +895,40 @@ public class MCBasicParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "or_1_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeToken(b, OP_OR);
+    r = OP_OR(b, l + 1);
     r = r && and(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
 
   /* ********************************************************** */
-  // IDENTIFIER (PUNCTUATION_COMMA IDENTIFIER)* PUNCTUATION_COMMA?
+  // IDENTIFIER type
+  public static boolean parameter(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "parameter")) return false;
+    if (!nextTokenIs(b, IDENTIFIER)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, IDENTIFIER);
+    r = r && type(b, l + 1);
+    exit_section_(b, m, PARAMETER, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // parameter (PUNCTUATION_COMMA parameter)* PUNCTUATION_COMMA?
   static boolean parameterList(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "parameterList")) return false;
     if (!nextTokenIs(b, IDENTIFIER)) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeToken(b, IDENTIFIER);
+    r = parameter(b, l + 1);
     r = r && parameterList_1(b, l + 1);
     r = r && parameterList_2(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
 
-  // (PUNCTUATION_COMMA IDENTIFIER)*
+  // (PUNCTUATION_COMMA parameter)*
   private static boolean parameterList_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "parameterList_1")) return false;
     while (true) {
@@ -670,12 +939,13 @@ public class MCBasicParser implements PsiParser, LightPsiParser {
     return true;
   }
 
-  // PUNCTUATION_COMMA IDENTIFIER
+  // PUNCTUATION_COMMA parameter
   private static boolean parameterList_1_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "parameterList_1_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeTokens(b, 0, PUNCTUATION_COMMA, IDENTIFIER);
+    r = PUNCTUATION_COMMA(b, l + 1);
+    r = r && parameter(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
@@ -683,7 +953,7 @@ public class MCBasicParser implements PsiParser, LightPsiParser {
   // PUNCTUATION_COMMA?
   private static boolean parameterList_2(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "parameterList_2")) return false;
-    consumeToken(b, PUNCTUATION_COMMA);
+    PUNCTUATION_COMMA(b, l + 1);
     return true;
   }
 
@@ -715,9 +985,9 @@ public class MCBasicParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "primary_1")) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeToken(b, PUNCTUATION_LPAREN);
+    r = PUNCTUATION_LPAREN(b, l + 1);
     r = r && expression(b, l + 1);
-    r = r && consumeToken(b, PUNCTUATION_RPAREN);
+    r = r && PUNCTUATION_RPAREN(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
@@ -763,9 +1033,9 @@ public class MCBasicParser implements PsiParser, LightPsiParser {
     if (!nextTokenIs(b, KEYWORD_RETURN)) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeToken(b, KEYWORD_RETURN);
+    r = KEYWORD_RETURN(b, l + 1);
     r = r && returnStatement_1(b, l + 1);
-    r = r && consumeToken(b, PUNCTUATION_SEMICOLON);
+    r = r && PUNCTUATION_SEMICOLON(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
@@ -778,53 +1048,87 @@ public class MCBasicParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // variableDeclaration
+  // KEYWORD_LET variableDeclaration
   //                 | ifStatement
-  //                 | functionDeclaration
+  //                 | KEYWORD_FUNC functionDeclaration
   //                 | blockStatement
   //                 | importStatement
   //                 | returnStatement
   //                 | execStatement
-  //                 | structDeclaration
+  //                 | KEYWORD_STRUCT structDeclaration
   //                 | expressionStatement
   public static boolean statement(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "statement")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, STATEMENT, "<statement>");
-    r = variableDeclaration(b, l + 1);
+    r = statement_0(b, l + 1);
     if (!r) r = ifStatement(b, l + 1);
-    if (!r) r = functionDeclaration(b, l + 1);
+    if (!r) r = statement_2(b, l + 1);
     if (!r) r = blockStatement(b, l + 1);
     if (!r) r = importStatement(b, l + 1);
     if (!r) r = returnStatement(b, l + 1);
     if (!r) r = execStatement(b, l + 1);
-    if (!r) r = structDeclaration(b, l + 1);
+    if (!r) r = statement_7(b, l + 1);
     if (!r) r = expressionStatement(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
 
-  /* ********************************************************** */
-  // KEYWORD_STRUCT IDENTIFIER PUNCTUATION_LBRACE structField* PUNCTUATION_RBRACE
-  public static boolean structDeclaration(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "structDeclaration")) return false;
-    if (!nextTokenIs(b, KEYWORD_STRUCT)) return false;
+  // KEYWORD_LET variableDeclaration
+  private static boolean statement_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "statement_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeTokens(b, 0, KEYWORD_STRUCT, IDENTIFIER, PUNCTUATION_LBRACE);
-    r = r && structDeclaration_3(b, l + 1);
-    r = r && consumeToken(b, PUNCTUATION_RBRACE);
+    r = KEYWORD_LET(b, l + 1);
+    r = r && variableDeclaration(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // KEYWORD_FUNC functionDeclaration
+  private static boolean statement_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "statement_2")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = KEYWORD_FUNC(b, l + 1);
+    r = r && functionDeclaration(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // KEYWORD_STRUCT structDeclaration
+  private static boolean statement_7(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "statement_7")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = KEYWORD_STRUCT(b, l + 1);
+    r = r && structDeclaration(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // IDENTIFIER PUNCTUATION_LBRACE structField* PUNCTUATION_RBRACE
+  public static boolean structDeclaration(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "structDeclaration")) return false;
+    if (!nextTokenIs(b, IDENTIFIER)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, IDENTIFIER);
+    r = r && PUNCTUATION_LBRACE(b, l + 1);
+    r = r && structDeclaration_2(b, l + 1);
+    r = r && PUNCTUATION_RBRACE(b, l + 1);
     exit_section_(b, m, STRUCT_DECLARATION, r);
     return r;
   }
 
   // structField*
-  private static boolean structDeclaration_3(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "structDeclaration_3")) return false;
+  private static boolean structDeclaration_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "structDeclaration_2")) return false;
     while (true) {
       int c = current_position_(b);
       if (!structField(b, l + 1)) break;
-      if (!empty_element_parsed_guard_(b, "structDeclaration_3", c)) break;
+      if (!empty_element_parsed_guard_(b, "structDeclaration_2", c)) break;
     }
     return true;
   }
@@ -838,7 +1142,7 @@ public class MCBasicParser implements PsiParser, LightPsiParser {
     Marker m = enter_section_(b);
     r = consumeToken(b, IDENTIFIER);
     r = r && type(b, l + 1);
-    r = r && consumeToken(b, PUNCTUATION_SEMICOLON);
+    r = r && PUNCTUATION_SEMICOLON(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
@@ -907,17 +1211,17 @@ public class MCBasicParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // KEYWORD_LET IDENTIFIER type OP_ASSIGN expression PUNCTUATION_SEMICOLON
+  // IDENTIFIER type OP_ASSIGN expression PUNCTUATION_SEMICOLON
   public static boolean variableDeclaration(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "variableDeclaration")) return false;
-    if (!nextTokenIs(b, KEYWORD_LET)) return false;
+    if (!nextTokenIs(b, IDENTIFIER)) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeTokens(b, 0, KEYWORD_LET, IDENTIFIER);
+    r = consumeToken(b, IDENTIFIER);
     r = r && type(b, l + 1);
-    r = r && consumeToken(b, OP_ASSIGN);
+    r = r && OP_ASSIGN(b, l + 1);
     r = r && expression(b, l + 1);
-    r = r && consumeToken(b, PUNCTUATION_SEMICOLON);
+    r = r && PUNCTUATION_SEMICOLON(b, l + 1);
     exit_section_(b, m, VARIABLE_DECLARATION, r);
     return r;
   }
