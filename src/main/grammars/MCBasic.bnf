@@ -70,9 +70,9 @@ private unary ::= (UNARY_OPERATORS unary) | value
 private value ::= baseValue (postFix*)?
 baseValue ::= IDENTIFIER | primary
 {
-  mixin="me.kolterdyx.mcbasiclanguage.psi.impl.MCBasicNamedElementImpl"
-  implements="me.kolterdyx.mcbasiclanguage.psi.MCBasicNamedElement"
-  methods=[getName setName getNameIdentifier]
+  mixin="me.kolterdyx.mcbasiclanguage.psi.impl.MCBasicReferenceImpl"
+  implements="me.kolterdyx.mcbasiclanguage.psi.MCBasicReference"
+  methods=[getElement]
 }
 private postFix ::= arrayAccess | functionCall | memberAccess
 private primary ::= literal | PUNCTUATION_LPAREN expression PUNCTUATION_RPAREN

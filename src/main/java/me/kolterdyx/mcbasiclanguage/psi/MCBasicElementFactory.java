@@ -14,28 +14,12 @@ public class MCBasicElementFactory {
     return (MCBasicFile) PsiFileFactory.getInstance(project).createFileFromText(name, MCBasicFileType.INSTANCE, text);
   }
 
-  public static MCBasicFunctionDeclaration createFunction(Project project, String name) {
-    MCBasicFile file = createFile(project, name);
-    return (MCBasicFunctionDeclaration) file.getFirstChild();
+  public static PsiElement createIdentifier(Project project, String name) {
+      MCBasicFile file = createFile(project, "let " + name + " int;");
+      PsiElement declaration = file.getFirstChild();
+      if (declaration == null) return null;
+
+      return declaration.getFirstChild();
   }
 
-    public static MCBasicVariableDeclaration createVariable(Project project, String name) {
-        MCBasicFile file = createFile(project, name);
-        return (MCBasicVariableDeclaration) file.getFirstChild();
-    }
-
-    public static MCBasicStructDeclaration createStruct(Project project, String name) {
-        MCBasicFile file = createFile(project, name);
-        return (MCBasicStructDeclaration) file.getFirstChild();
-    }
-
-    public static MCBasicBaseValue createBaseValue(@NotNull Project project, String newName) {
-        MCBasicFile file = createFile(project, newName);
-        PsiElement firstChild = file.getFirstChild();
-        if (firstChild instanceof MCBasicBaseValue) {
-            return (MCBasicBaseValue) firstChild;
-        } else {
-            throw new IllegalArgumentException("The first child is not a valid MCBasicBaseValue");
-        }
-    }
 }
