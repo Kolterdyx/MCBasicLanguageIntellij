@@ -15,10 +15,10 @@ import com.intellij.lexer.FlexLexer;
 %eof{  return;
 %eof}
 
-NewLine=\R
-Whitespace=[\ \n\t\f]
-Comment=("#")[^\r\n]*
-Identifier = [:jletter:] [:jletterdigit:]*
+NewLine = \R
+Whitespace = [\ \n\t\f]
+Comment = ("#")[^\r\n]*
+Identifier = [a-zA-Z_][a-zA-Z0-9_]*
 
 DecInteger = [0-9]+
 DecDouble = [0-9]*\.[0-9]+([eE][+-]?[0-9]+)?

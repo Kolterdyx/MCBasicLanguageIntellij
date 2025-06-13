@@ -15,6 +15,14 @@ public class MCBasicVisitor extends PsiElementVisitor {
     visitNamedElement(o);
   }
 
+  public void visitIdentifierType(@NotNull MCBasicIdentifierType o) {
+    visitReference(o);
+  }
+
+  public void visitParameter(@NotNull MCBasicParameter o) {
+    visitNamedElement(o);
+  }
+
   public void visitStatement(@NotNull MCBasicStatement o) {
     visitPsiElement(o);
   }

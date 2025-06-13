@@ -28,6 +28,12 @@ public class MCBasicFunctionDeclarationImpl extends MCBasicNamedElementImpl impl
 
   @Override
   @NotNull
+  public List<MCBasicParameter> getParameterList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, MCBasicParameter.class);
+  }
+
+  @Override
+  @NotNull
   public List<MCBasicStatement> getStatementList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, MCBasicStatement.class);
   }

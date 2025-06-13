@@ -67,27 +67,27 @@ mcbasicFile ::= item_*
 
 private item_ ::= (statement|COMMENT|NEWLINE)+
 
-statement ::= variableDeclaration
+statement ::= KEYWORD_LET variableDeclaration
                 | ifStatement
-                | functionDeclaration
+                | KEYWORD_FUNC functionDeclaration
                 | blockStatement
                 | importStatement
                 | returnStatement
                 | execStatement
-                | structDeclaration
+                | KEYWORD_STRUCT structDeclaration
                 | expressionStatement
 // STATEMENT
 
 private blockStatement ::= PUNCTUATION_LBRACE statement* PUNCTUATION_RBRACE
 private importStatement ::= KEYWORD_IMPORT (OP_MULTIPLY | IDENTIFIER (KEYWORD_AS IDENTIFIER)?) KEYWORD_FROM STRING_LITERAL PUNCTUATION_SEMICOLON
-variableDeclaration ::= KEYWORD_LET IDENTIFIER type OP_ASSIGN expression PUNCTUATION_SEMICOLON
+variableDeclaration ::= IDENTIFIER type OP_ASSIGN expression PUNCTUATION_SEMICOLON
 {
   mixin="me.kolterdyx.mcbasiclanguage.psi.impl.MCBasicNamedElementImpl"
   implements="me.kolterdyx.mcbasiclanguage.psi.MCBasicNamedElement"
   methods=[getName setName getNameIdentifier]
 }
 private ifStatement ::= KEYWORD_IF PUNCTUATION_LPAREN expression PUNCTUATION_RPAREN blockStatement (KEYWORD_ELSE blockStatement | ifStatement)?
-functionDeclaration ::= KEYWORD_FUNC IDENTIFIER PUNCTUATION_LPAREN parameterList? PUNCTUATION_RPAREN blockStatement
+functionDeclaration ::= IDENTIFIER PUNCTUATION_LPAREN parameterList? PUNCTUATION_RPAREN blockStatement
 {
   mixin="me.kolterdyx.mcbasiclanguage.psi.impl.MCBasicNamedElementImpl"
   implements="me.kolterdyx.mcbasiclanguage.psi.MCBasicNamedElement"
@@ -95,7 +95,7 @@ functionDeclaration ::= KEYWORD_FUNC IDENTIFIER PUNCTUATION_LPAREN parameterList
 }
 private returnStatement ::= KEYWORD_RETURN expression? PUNCTUATION_SEMICOLON
 private execStatement ::= KEYWORD_EXEC expression PUNCTUATION_SEMICOLON
-structDeclaration ::= KEYWORD_STRUCT IDENTIFIER PUNCTUATION_LBRACE structField* PUNCTUATION_RBRACE
+structDeclaration ::= IDENTIFIER PUNCTUATION_LBRACE structField* PUNCTUATION_RBRACE
 {
   mixin="me.kolterdyx.mcbasiclanguage.psi.impl.MCBasicNamedElementImpl"
   implements="me.kolterdyx.mcbasiclanguage.psi.MCBasicNamedElement"
@@ -125,7 +125,6 @@ baseValue ::= IDENTIFIER | primary
 private postFix ::= arrayAccess | functionCall | memberAccess
 private primary ::= literal | PUNCTUATION_LPAREN expression PUNCTUATION_RPAREN
 
-
 // COMPONENTS
 
 
@@ -133,8 +132,15 @@ private arrayAccess ::= PUNCTUATION_LBRACKET expression PUNCTUATION_RBRACKET
 private functionCall ::= PUNCTUATION_LPAREN argumentList? PUNCTUATION_RPAREN
 private memberAccess ::= PUNCTUATION_DOT IDENTIFIER
 
-private parameterList ::= IDENTIFIER (PUNCTUATION_COMMA IDENTIFIER)* PUNCTUATION_COMMA?
+private parameterList ::= parameter (PUNCTUATION_COMMA parameter)* PUNCTUATION_COMMA?
 private argumentList ::= expression (PUNCTUATION_COMMA expression)* PUNCTUATION_COMMA?
+
+parameter ::= IDENTIFIER type
+{
+  mixin="me.kolterdyx.mcbasiclanguage.psi.impl.MCBasicNamedElementImpl"
+  implements="me.kolterdyx.mcbasiclanguage.psi.MCBasicNamedElement"
+  methods=[getName setName getNameIdentifier]
+}
 
 private literal ::= STRING_LITERAL
                 | INTEGER_LITERAL
@@ -148,7 +154,13 @@ private type ::= listType | baseType
 private baseType ::= KEYWORD_INT
                      | KEYWORD_STR
                      | KEYWORD_DOUBLE
-                     | IDENTIFIER
+                     | identifierType
+identifierType ::= IDENTIFIER
+{
+  mixin="me.kolterdyx.mcbasiclanguage.psi.impl.MCBasicReferenceImpl"
+  implements="me.kolterdyx.mcbasiclanguage.psi.MCBasicReference"
+  methods=[getElement]
+}
 private listType ::= baseType PUNCTUATION_LBRACKET PUNCTUATION_RBRACKET
 
 private structField ::= IDENTIFIER type PUNCTUATION_SEMICOLON
@@ -172,7 +184,7 @@ private MULTIPLICATIVE_OPERATORS ::= OP_MULTIPLY
 private UNARY_OPERATORS ::= OP_NOT
                              | OP_MINUS
 
-
+IDENTIFIER
 
 private KEYWORD_FUNC ::= "func"
 private KEYWORD_LET ::= "let"

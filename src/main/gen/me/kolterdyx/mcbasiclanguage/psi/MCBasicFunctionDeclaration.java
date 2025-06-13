@@ -8,6 +8,9 @@ import com.intellij.psi.PsiElement;
 public interface MCBasicFunctionDeclaration extends MCBasicNamedElement {
 
   @NotNull
+  List<MCBasicParameter> getParameterList();
+
+  @NotNull
   List<MCBasicStatement> getStatementList();
 
   String getName();

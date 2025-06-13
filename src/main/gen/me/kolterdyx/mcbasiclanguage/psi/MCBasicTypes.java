@@ -10,6 +10,8 @@ public interface MCBasicTypes {
 
   IElementType BASE_VALUE = new MCBasicElementType("BASE_VALUE");
   IElementType FUNCTION_DECLARATION = new MCBasicElementType("FUNCTION_DECLARATION");
+  IElementType IDENTIFIER_TYPE = new MCBasicElementType("IDENTIFIER_TYPE");
+  IElementType PARAMETER = new MCBasicElementType("PARAMETER");
   IElementType STATEMENT = new MCBasicElementType("STATEMENT");
   IElementType STRUCT_DECLARATION = new MCBasicElementType("STRUCT_DECLARATION");
   IElementType VARIABLE_DECLARATION = new MCBasicElementType("VARIABLE_DECLARATION");
@@ -68,6 +70,12 @@ public interface MCBasicTypes {
       }
       else if (type == FUNCTION_DECLARATION) {
         return new MCBasicFunctionDeclarationImpl(node);
+      }
+      else if (type == IDENTIFIER_TYPE) {
+        return new MCBasicIdentifierTypeImpl(node);
+      }
+      else if (type == PARAMETER) {
+        return new MCBasicParameterImpl(node);
       }
       else if (type == STATEMENT) {
         return new MCBasicStatementImpl(node);
