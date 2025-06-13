@@ -2,6 +2,9 @@
 <idea-plugin>
 
   <id>me.kolterdyx.mcbasiclanguage</id>
+  <version>0.1.0</version>
+  <idea-version since-build="242"/>
+
 
   <name>MCBasic</name>
 
@@ -21,7 +24,12 @@
     ]]>
   </change-notes>
 
-  <vendor url="https://cirogarcia.dev">Ciro García Belmonte</vendor>
+  <vendor
+    email="info@cirogarcia.dev"
+    url="https://cirogarcia.dev"
+  >
+    Ciro García Belmonte
+  </vendor>
 
   <extensions defaultExtensionNs="com.intellij">
     <fileType
