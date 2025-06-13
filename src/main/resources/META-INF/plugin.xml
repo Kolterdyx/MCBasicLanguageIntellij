@@ -7,7 +7,7 @@
   <id>me.kolterdyx.mcbasiclanguage</id>
 
   <!-- Text to display as name on Settings | Plugin page -->
-  <name>MCBasic Language</name>
+  <name>MCBasic</name>
 
   <!-- Product and plugin compatibility requirements -->
   <depends>com.intellij.modules.platform</depends>
@@ -15,7 +15,9 @@
   <!-- Text to display as description on Settings | Plugin page -->
   <description>
     <![CDATA[
-      MCBasic is a custom language designed for easily creating Minecraft datapacks. This plugin provides syntax highlighting and reference navigation for MCBasic files (.mcb). It is intended to be used in conjunction with the MCBasic compiler, which translates MCBasic code into Minecraft datapacks.
+      MCBasic is a custom language designed for easily creating Minecraft datapacks.
+      This plugin provides syntax highlighting and reference navigation for MCBasic files (.mcb).
+      It is intended to be used in conjunction with the <a href="https://github.com/Kolterdyx/mcbasic">MCBasic compiler</a>, which translates MCBasic code into Minecraft datapacks.
     ]]>
   </description>
   <change-notes>
