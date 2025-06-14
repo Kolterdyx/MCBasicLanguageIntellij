@@ -7,6 +7,6 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.StubBasedPsiElement;
 import me.kolterdyx.mcbasiclanguage.stub.MCBasicNamedStubElement;
 
-public interface MCBasicPlainImport extends MCBasicNamedElement, StubBasedPsiElement<MCBasicNamedStubElement> {
+public interface MCBasicPlainImport extends MCBasicImportElement, StubBasedPsiElement<MCBasicNamedStubElement> {
 
 }

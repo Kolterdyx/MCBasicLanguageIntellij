@@ -17,6 +17,8 @@ public interface MCBasicTypes {
   IElementType BASE_VALUE = new MCBasicElementType("BASE_VALUE");
   IElementType FUNCTION_DECLARATION = new MCBasicFunctionDeclarationStubElementType("FUNCTION_DECLARATION");
   IElementType IDENTIFIER_TYPE = new MCBasicElementType("IDENTIFIER_TYPE");
+  IElementType IMPORT_PATH = new MCBasicElementType("IMPORT_PATH");
+  IElementType IMPORT_STATEMENT = new MCBasicElementType("IMPORT_STATEMENT");
   IElementType PARAMETER = new MCBasicParameterStubElementType("PARAMETER");
   IElementType PLAIN_IMPORT = new MCBasicPlainImportStubElementType("PLAIN_IMPORT");
   IElementType STATEMENT = new MCBasicElementType("STATEMENT");
@@ -83,6 +85,12 @@ public interface MCBasicTypes {
       }
       else if (type == IDENTIFIER_TYPE) {
         return new MCBasicIdentifierTypeImpl(node);
+      }
+      else if (type == IMPORT_PATH) {
+        return new MCBasicImportPathImpl(node);
+      }
+      else if (type == IMPORT_STATEMENT) {
+        return new MCBasicImportStatementImpl(node);
       }
       else if (type == PARAMETER) {
         return new MCBasicParameterImpl(node);

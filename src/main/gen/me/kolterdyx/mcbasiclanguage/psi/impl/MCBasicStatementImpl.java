@@ -29,12 +29,6 @@ public class MCBasicStatementImpl extends ASTWrapperPsiElement implements MCBasi
 
   @Override
   @NotNull
-  public List<MCBasicAliasedImport> getAliasedImportList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, MCBasicAliasedImport.class);
-  }
-
-  @Override
-  @NotNull
   public List<MCBasicBaseValue> getBaseValueList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, MCBasicBaseValue.class);
   }
@@ -46,9 +40,9 @@ public class MCBasicStatementImpl extends ASTWrapperPsiElement implements MCBasi
   }
 
   @Override
-  @NotNull
-  public List<MCBasicPlainImport> getPlainImportList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, MCBasicPlainImport.class);
+  @Nullable
+  public MCBasicImportStatement getImportStatement() {
+    return PsiTreeUtil.getChildOfType(this, MCBasicImportStatement.class);
   }
 
   @Override

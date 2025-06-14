@@ -23,12 +23,20 @@ public class MCBasicVisitor extends PsiElementVisitor {
     visitElement(o);
   }
 
+  public void visitImportPath(@NotNull MCBasicImportPath o) {
+    visitElement(o);
+  }
+
+  public void visitImportStatement(@NotNull MCBasicImportStatement o) {
+    visitPsiElement(o);
+  }
+
   public void visitParameter(@NotNull MCBasicParameter o) {
     visitNamedElement(o);
   }
 
   public void visitPlainImport(@NotNull MCBasicPlainImport o) {
-    visitNamedElement(o);
+    visitImportElement(o);
   }
 
   public void visitStatement(@NotNull MCBasicStatement o) {
@@ -44,6 +52,10 @@ public class MCBasicVisitor extends PsiElementVisitor {
   }
 
   public void visitElement(@NotNull MCBasicElement o) {
+    visitPsiElement(o);
+  }
+
+  public void visitImportElement(@NotNull MCBasicImportElement o) {
     visitPsiElement(o);
   }
 

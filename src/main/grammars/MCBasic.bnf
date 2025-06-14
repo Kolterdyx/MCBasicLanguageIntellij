@@ -76,7 +76,11 @@ statement ::= KEYWORD_LET variableDeclaration
 
 private blockStatement ::= PUNCTUATION_LBRACE statement* PUNCTUATION_RBRACE
 
-private importStatement ::= KEYWORD_IMPORT importList KEYWORD_FROM STRING_LITERAL PUNCTUATION_SEMICOLON
+importStatement ::= KEYWORD_IMPORT importList KEYWORD_FROM importPath PUNCTUATION_SEMICOLON
+importPath ::= STRING_LITERAL {
+  mixin="me.kolterdyx.mcbasiclanguage.psi.impl.MCBasicElementImpl"
+  implements="me.kolterdyx.mcbasiclanguage.psi.MCBasicElement"
+}
 private importList ::= importSymbol ((PUNCTUATION_COMMA importSymbol)*)?
 private importSymbol ::= OP_MULTIPLY
                       | aliasedImport
@@ -93,8 +97,8 @@ private alias ::= KEYWORD_AS plainImport {
 }
 
 plainImport ::= importIdentifier {
-  mixin="me.kolterdyx.mcbasiclanguage.psi.impl.MCBasicNamedElementImpl"
-  implements="me.kolterdyx.mcbasiclanguage.psi.MCBasicNamedElement"
+  mixin="me.kolterdyx.mcbasiclanguage.psi.impl.MCBasicImportElementImpl"
+  implements="me.kolterdyx.mcbasiclanguage.psi.MCBasicImportElement"
   stubClass = "me.kolterdyx.mcbasiclanguage.stub.MCBasicNamedStubElement"
   elementTypeClass = "me.kolterdyx.mcbasiclanguage.stub.impl.MCBasicPlainImportStubElementType"
 }

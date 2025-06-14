@@ -12,9 +12,9 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 
-public abstract class MCBasicStubElementType extends IStubElementType<MCBasicNamedStubElement, MCBasicNamedElement> {
+public abstract class MCBasicNamedStubElementType extends IStubElementType<MCBasicNamedStubElement, MCBasicNamedElement> {
 
-    public MCBasicStubElementType(@NotNull @NonNls String debugName) {
+    public MCBasicNamedStubElementType(@NotNull @NonNls String debugName) {
         super(debugName, MCBasicLanguage.INSTANCE);
     }
 

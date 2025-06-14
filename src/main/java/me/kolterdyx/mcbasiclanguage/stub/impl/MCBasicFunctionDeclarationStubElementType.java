@@ -4,7 +4,7 @@ import me.kolterdyx.mcbasiclanguage.psi.impl.MCBasicFunctionDeclarationImpl;
 import me.kolterdyx.mcbasiclanguage.stub.MCBasicNamedStubElement;
 import org.jetbrains.annotations.NotNull;
 
-public class MCBasicFunctionDeclarationStubElementType extends MCBasicStubElementType {
+public class MCBasicFunctionDeclarationStubElementType extends MCBasicNamedStubElementType {
 
     public MCBasicFunctionDeclarationStubElementType(@NotNull String debugName) {
         super(debugName);

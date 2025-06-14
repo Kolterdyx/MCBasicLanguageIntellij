@@ -3,7 +3,7 @@ import me.kolterdyx.mcbasiclanguage.psi.impl.MCBasicStructDeclarationImpl;
 import me.kolterdyx.mcbasiclanguage.stub.MCBasicNamedStubElement;
 import org.jetbrains.annotations.NotNull;
 
-public class MCBasicStructDeclarationStubElementType extends MCBasicStubElementType {
+public class MCBasicStructDeclarationStubElementType extends MCBasicNamedStubElementType {
 
     public MCBasicStructDeclarationStubElementType(@NotNull String debugName) {
         super(debugName);

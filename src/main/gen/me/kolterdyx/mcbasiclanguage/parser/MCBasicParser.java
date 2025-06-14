@@ -777,6 +777,18 @@ public class MCBasicParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // STRING_LITERAL
+  public static boolean importPath(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "importPath")) return false;
+    if (!nextTokenIs(b, STRING_LITERAL)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, STRING_LITERAL);
+    exit_section_(b, m, IMPORT_PATH, r);
+    return r;
+  }
+
+  /* ********************************************************** */
   // !(PUNCTUATION_COMMA | KEYWORD_FROM)
   static boolean importRecover(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "importRecover")) return false;
@@ -803,8 +815,8 @@ public class MCBasicParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // KEYWORD_IMPORT importList KEYWORD_FROM STRING_LITERAL PUNCTUATION_SEMICOLON
-  static boolean importStatement(PsiBuilder b, int l) {
+  // KEYWORD_IMPORT importList KEYWORD_FROM importPath PUNCTUATION_SEMICOLON
+  public static boolean importStatement(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "importStatement")) return false;
     if (!nextTokenIs(b, KEYWORD_IMPORT)) return false;
     boolean r;
@@ -812,9 +824,9 @@ public class MCBasicParser implements PsiParser, LightPsiParser {
     r = KEYWORD_IMPORT(b, l + 1);
     r = r && importList(b, l + 1);
     r = r && KEYWORD_FROM(b, l + 1);
-    r = r && consumeToken(b, STRING_LITERAL);
+    r = r && importPath(b, l + 1);
     r = r && PUNCTUATION_SEMICOLON(b, l + 1);
-    exit_section_(b, m, null, r);
+    exit_section_(b, m, IMPORT_STATEMENT, r);
     return r;
   }
 
