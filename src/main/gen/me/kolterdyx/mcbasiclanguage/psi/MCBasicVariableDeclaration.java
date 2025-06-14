@@ -4,19 +4,15 @@ package me.kolterdyx.mcbasiclanguage.psi;
 import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.StubBasedPsiElement;
+import me.kolterdyx.mcbasiclanguage.stub.MCBasicNamedStub;
 
-public interface MCBasicVariableDeclaration extends MCBasicNamedElement {
+public interface MCBasicVariableDeclaration extends MCBasicNamedElement, StubBasedPsiElement<MCBasicNamedStub> {
 
   @NotNull
   List<MCBasicBaseValue> getBaseValueList();
 
   @Nullable
   MCBasicIdentifierType getIdentifierType();
-
-  String getName();
-
-  PsiElement setName(String newName);
-
-  PsiElement getNameIdentifier();
 
 }

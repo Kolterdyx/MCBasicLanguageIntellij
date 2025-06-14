@@ -42,7 +42,7 @@ public class MCBasicStatementImpl extends ASTWrapperPsiElement implements MCBasi
   @Override
   @Nullable
   public MCBasicFunctionDeclaration getFunctionDeclaration() {
-    return findChildByClass(MCBasicFunctionDeclaration.class);
+    return PsiTreeUtil.getChildOfType(this, MCBasicFunctionDeclaration.class);
   }
 
   @Override
@@ -60,13 +60,13 @@ public class MCBasicStatementImpl extends ASTWrapperPsiElement implements MCBasi
   @Override
   @Nullable
   public MCBasicStructDeclaration getStructDeclaration() {
-    return findChildByClass(MCBasicStructDeclaration.class);
+    return PsiTreeUtil.getChildOfType(this, MCBasicStructDeclaration.class);
   }
 
   @Override
   @Nullable
   public MCBasicVariableDeclaration getVariableDeclaration() {
-    return findChildByClass(MCBasicVariableDeclaration.class);
+    return PsiTreeUtil.getChildOfType(this, MCBasicVariableDeclaration.class);
   }
 
 }

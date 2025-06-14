@@ -10,7 +10,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static me.kolterdyx.mcbasiclanguage.psi.MCBasicTypes.*;
 import me.kolterdyx.mcbasiclanguage.psi.*;
 
-public class MCBasicBaseValueImpl extends MCBasicReferenceImpl implements MCBasicBaseValue {
+public class MCBasicBaseValueImpl extends MCBasicElementImpl implements MCBasicBaseValue {
 
   public MCBasicBaseValueImpl(@NotNull ASTNode node) {
     super(node);

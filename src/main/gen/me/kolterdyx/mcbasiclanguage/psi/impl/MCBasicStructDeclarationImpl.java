@@ -9,11 +9,17 @@ import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static me.kolterdyx.mcbasiclanguage.psi.MCBasicTypes.*;
 import me.kolterdyx.mcbasiclanguage.psi.*;
+import me.kolterdyx.mcbasiclanguage.stub.MCBasicNamedStub;
+import com.intellij.psi.stubs.IStubElementType;
 
 public class MCBasicStructDeclarationImpl extends MCBasicNamedElementImpl implements MCBasicStructDeclaration {
 
   public MCBasicStructDeclarationImpl(@NotNull ASTNode node) {
     super(node);
+  }
+
+  public MCBasicStructDeclarationImpl(@NotNull MCBasicNamedStub stub, IStubElementType<?, ?> type) {
+    super(stub, type);
   }
 
   public void accept(@NotNull MCBasicVisitor visitor) {
@@ -30,21 +36,6 @@ public class MCBasicStructDeclarationImpl extends MCBasicNamedElementImpl implem
   @NotNull
   public List<MCBasicIdentifierType> getIdentifierTypeList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, MCBasicIdentifierType.class);
-  }
-
-  @Override
-  public String getName() {
-    return MCBasicPsiImplUtil.getName(this);
-  }
-
-  @Override
-  public PsiElement setName(String newName) {
-    return MCBasicPsiImplUtil.setName(this, newName);
-  }
-
-  @Override
-  public PsiElement getNameIdentifier() {
-    return MCBasicPsiImplUtil.getNameIdentifier(this);
   }
 
 }

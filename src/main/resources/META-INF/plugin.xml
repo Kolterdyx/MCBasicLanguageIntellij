@@ -55,6 +55,13 @@
             language="MCBasic"
             implementationClass="me.kolterdyx.mcbasiclanguage.MCBasicFindUsagesProvider"
     />
+    <stubIndex
+            implementation="me.kolterdyx.mcbasiclanguage.MCBasicSymbolIndex"
+    />
+    <stubElementTypeHolder
+            class="me.kolterdyx.mcbasiclanguage.psi.MCBasicTypes"
+            externalIdPrefix="mcbasic"
+    />
   </extensions>
 
 </idea-plugin>

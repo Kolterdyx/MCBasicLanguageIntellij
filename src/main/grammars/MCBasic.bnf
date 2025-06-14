@@ -56,10 +56,6 @@
   elementTypeHolderClass="me.kolterdyx.mcbasiclanguage.psi.MCBasicTypes"
   elementTypeClass="me.kolterdyx.mcbasiclanguage.psi.MCBasicElementType"
   tokenTypeClass="me.kolterdyx.mcbasiclanguage.psi.MCBasicTokenType"
-
-  psiImplUtilClass="me.kolterdyx.mcbasiclanguage.psi.impl.MCBasicPsiImplUtil"
-
-
 }
 
 
@@ -79,28 +75,33 @@ statement ::= KEYWORD_LET variableDeclaration
 // STATEMENT
 
 private blockStatement ::= PUNCTUATION_LBRACE statement* PUNCTUATION_RBRACE
+
 private importStatement ::= KEYWORD_IMPORT importList KEYWORD_FROM STRING_LITERAL PUNCTUATION_SEMICOLON
-
 private importList ::= importSymbol ((PUNCTUATION_COMMA importSymbol)*)?
-
 private importSymbol ::= OP_MULTIPLY
-                        | aliasedImport
-                        | plainImport
+                      | aliasedImport
+                      | plainImport
 
-aliasedImport ::= IDENTIFIER KEYWORD_AS plainImport {
+aliasedImport ::= importReference alias  {
+  mixin="me.kolterdyx.mcbasiclanguage.psi.impl.MCBasicElementImpl"
+  implements="me.kolterdyx.mcbasiclanguage.psi.MCBasicElement"
+}
+
+private alias ::= KEYWORD_AS plainImport {
   pin=1
   recoverWhile=importRecover
-  mixin="me.kolterdyx.mcbasiclanguage.psi.impl.MCBasicReferenceImpl"
-  implements="me.kolterdyx.mcbasiclanguage.psi.MCBasicReference"
-  methods=[getElement]
 }
 
-plainImport ::= IDENTIFIER
-{
+plainImport ::= importIdentifier {
   mixin="me.kolterdyx.mcbasiclanguage.psi.impl.MCBasicNamedElementImpl"
   implements="me.kolterdyx.mcbasiclanguage.psi.MCBasicNamedElement"
-  methods=[getName setName getNameIdentifier]
+  stubClass = "me.kolterdyx.mcbasiclanguage.stub.MCBasicNamedStub"
+  elementTypeClass = "me.kolterdyx.mcbasiclanguage.stub.impl.MCBasicPlainImportStubElementType"
 }
+
+private importReference ::= IDENTIFIER
+
+private importIdentifier ::= IDENTIFIER
 
 private importRecover ::= !(PUNCTUATION_COMMA | KEYWORD_FROM)
 
@@ -108,14 +109,16 @@ variableDeclaration ::= IDENTIFIER type OP_ASSIGN expression PUNCTUATION_SEMICOL
 {
   mixin="me.kolterdyx.mcbasiclanguage.psi.impl.MCBasicNamedElementImpl"
   implements="me.kolterdyx.mcbasiclanguage.psi.MCBasicNamedElement"
-  methods=[getName setName getNameIdentifier]
+  stubClass = "me.kolterdyx.mcbasiclanguage.stub.MCBasicNamedStub"
+  elementTypeClass = "me.kolterdyx.mcbasiclanguage.stub.impl.MCBasicVariableDeclarationStubElementType"
 }
 private ifStatement ::= KEYWORD_IF PUNCTUATION_LPAREN expression PUNCTUATION_RPAREN blockStatement (KEYWORD_ELSE blockStatement | ifStatement)?
 functionDeclaration ::= IDENTIFIER PUNCTUATION_LPAREN parameterList? PUNCTUATION_RPAREN type? blockStatement
 {
+  stubClass = "me.kolterdyx.mcbasiclanguage.stub.MCBasicNamedStub"
   mixin="me.kolterdyx.mcbasiclanguage.psi.impl.MCBasicNamedElementImpl"
   implements="me.kolterdyx.mcbasiclanguage.psi.MCBasicNamedElement"
-  methods=[getName setName getNameIdentifier]
+  elementTypeClass = "me.kolterdyx.mcbasiclanguage.stub.impl.MCBasicFunctionDeclarationStubElementType"
 }
 private returnStatement ::= KEYWORD_RETURN expression? PUNCTUATION_SEMICOLON
 private execStatement ::= KEYWORD_EXEC expression PUNCTUATION_SEMICOLON
@@ -123,7 +126,8 @@ structDeclaration ::= IDENTIFIER PUNCTUATION_LBRACE structField* PUNCTUATION_RBR
 {
   mixin="me.kolterdyx.mcbasiclanguage.psi.impl.MCBasicNamedElementImpl"
   implements="me.kolterdyx.mcbasiclanguage.psi.MCBasicNamedElement"
-  methods=[getName setName getNameIdentifier]
+  stubClass = "me.kolterdyx.mcbasiclanguage.stub.MCBasicNamedStub"
+  elementTypeClass = "me.kolterdyx.mcbasiclanguage.stub.impl.MCBasicStructDeclarationStubElementType"
 }
 private expressionStatement ::= expression PUNCTUATION_SEMICOLON
 
@@ -142,9 +146,8 @@ private unary ::= (UNARY_OPERATORS unary) | value
 private value ::= baseValue (postFix*)?
 baseValue ::= IDENTIFIER | primary
 {
-  mixin="me.kolterdyx.mcbasiclanguage.psi.impl.MCBasicReferenceImpl"
-  implements="me.kolterdyx.mcbasiclanguage.psi.MCBasicReference"
-  methods=[getElement]
+  mixin="me.kolterdyx.mcbasiclanguage.psi.impl.MCBasicElementImpl"
+  implements="me.kolterdyx.mcbasiclanguage.psi.MCBasicElement"
 }
 private postFix ::= arrayAccess | functionCall | memberAccess
 private primary ::= literal | PUNCTUATION_LPAREN expression PUNCTUATION_RPAREN
@@ -163,7 +166,7 @@ parameter ::= IDENTIFIER type
 {
   mixin="me.kolterdyx.mcbasiclanguage.psi.impl.MCBasicNamedElementImpl"
   implements="me.kolterdyx.mcbasiclanguage.psi.MCBasicNamedElement"
-  methods=[getName setName getNameIdentifier]
+  stubClass = "me.kolterdyx.mcbasiclanguage.stub.MCBasicNamedStub"
 }
 
 private literal ::= STRING_LITERAL
@@ -181,9 +184,8 @@ private baseType ::= KEYWORD_INT
                      | identifierType
 identifierType ::= IDENTIFIER
 {
-  mixin="me.kolterdyx.mcbasiclanguage.psi.impl.MCBasicReferenceImpl"
-  implements="me.kolterdyx.mcbasiclanguage.psi.MCBasicReference"
-  methods=[getElement]
+  mixin="me.kolterdyx.mcbasiclanguage.psi.impl.MCBasicElementImpl"
+  implements="me.kolterdyx.mcbasiclanguage.psi.MCBasicElement"
 }
 private listType ::= baseType PUNCTUATION_LBRACKET PUNCTUATION_RBRACKET
 

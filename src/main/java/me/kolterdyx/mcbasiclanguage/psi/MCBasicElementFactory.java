@@ -4,8 +4,8 @@ package me.kolterdyx.mcbasiclanguage.psi;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFileFactory;
+import com.intellij.psi.util.PsiTreeUtil;
 import me.kolterdyx.mcbasiclanguage.MCBasicFileType;
-import org.jetbrains.annotations.NotNull;
 
 public class MCBasicElementFactory {
 
@@ -16,10 +16,9 @@ public class MCBasicElementFactory {
 
   public static PsiElement createIdentifier(Project project, String name) {
       MCBasicFile file = createFile(project, "let " + name + " int;");
-      PsiElement declaration = file.getFirstChild();
-      if (declaration == null) return null;
-
-      return declaration.getFirstChild();
+      return PsiTreeUtil.findChildOfType(file, MCBasicNamedElement.class);
   }
+
+
 
 }

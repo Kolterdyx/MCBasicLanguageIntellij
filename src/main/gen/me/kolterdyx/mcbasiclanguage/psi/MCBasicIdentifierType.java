@@ -5,10 +5,6 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface MCBasicIdentifierType extends MCBasicReference {
-
-  //WARNING: getElement(...) is skipped
-  //matching getElement(MCBasicIdentifierType, ...)
-  //methods are not found in MCBasicPsiImplUtil
+public interface MCBasicIdentifierType extends MCBasicElement {
 
 }

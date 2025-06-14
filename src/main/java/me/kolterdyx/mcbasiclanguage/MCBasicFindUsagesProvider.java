@@ -47,7 +47,11 @@ public class MCBasicFindUsagesProvider implements FindUsagesProvider {
 
     @Override
     public @NotNull String getDescriptiveName(@NotNull PsiElement element) {
-        return Objects.requireNonNull(((PsiNamedElement) element).getName());
+        if (element instanceof MCBasicNamedElement namedElement) {
+            String name = namedElement.getName();
+            return Objects.requireNonNullElse(name, "Unnamed");
+        }
+        return "Unknown Element";
     }
 
     @Override

@@ -385,17 +385,29 @@ public class MCBasicParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // IDENTIFIER KEYWORD_AS plainImport
-  public static boolean aliasedImport(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "aliasedImport")) return false;
+  // KEYWORD_AS plainImport
+  static boolean alias(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "alias")) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, ALIASED_IMPORT, "<aliased import>");
-    r = consumeToken(b, IDENTIFIER);
+    Marker m = enter_section_(b, l, _NONE_);
+    r = KEYWORD_AS(b, l + 1);
     p = r; // pin = 1
-    r = r && report_error_(b, KEYWORD_AS(b, l + 1));
-    r = p && plainImport(b, l + 1) && r;
+    r = r && plainImport(b, l + 1);
     exit_section_(b, l, m, r, p, MCBasicParser::importRecover);
     return r || p;
+  }
+
+  /* ********************************************************** */
+  // importReference alias
+  public static boolean aliasedImport(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "aliasedImport")) return false;
+    if (!nextTokenIs(b, IDENTIFIER)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = importReference(b, l + 1);
+    r = r && alias(b, l + 1);
+    exit_section_(b, m, ALIASED_IMPORT, r);
+    return r;
   }
 
   /* ********************************************************** */
@@ -717,6 +729,12 @@ public class MCBasicParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // IDENTIFIER
+  static boolean importIdentifier(PsiBuilder b, int l) {
+    return consumeToken(b, IDENTIFIER);
+  }
+
+  /* ********************************************************** */
   // importSymbol ((PUNCTUATION_COMMA importSymbol)*)?
   static boolean importList(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "importList")) return false;
@@ -779,6 +797,12 @@ public class MCBasicParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // IDENTIFIER
+  static boolean importReference(PsiBuilder b, int l) {
+    return consumeToken(b, IDENTIFIER);
+  }
+
+  /* ********************************************************** */
   // KEYWORD_IMPORT importList KEYWORD_FROM STRING_LITERAL PUNCTUATION_SEMICOLON
   static boolean importStatement(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "importStatement")) return false;
@@ -796,17 +820,15 @@ public class MCBasicParser implements PsiParser, LightPsiParser {
 
   /* ********************************************************** */
   // OP_MULTIPLY
-  //                         | aliasedImport
-  //                         | plainImport
+  //                       | aliasedImport
+  //                       | plainImport
   static boolean importSymbol(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "importSymbol")) return false;
     if (!nextTokenIs(b, "", IDENTIFIER, OP_STAR)) return false;
     boolean r;
-    Marker m = enter_section_(b);
     r = OP_MULTIPLY(b, l + 1);
     if (!r) r = aliasedImport(b, l + 1);
     if (!r) r = plainImport(b, l + 1);
-    exit_section_(b, m, null, r);
     return r;
   }
 
@@ -1018,13 +1040,13 @@ public class MCBasicParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // IDENTIFIER
+  // importIdentifier
   public static boolean plainImport(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "plainImport")) return false;
     if (!nextTokenIs(b, IDENTIFIER)) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeToken(b, IDENTIFIER);
+    r = importIdentifier(b, l + 1);
     exit_section_(b, m, PLAIN_IMPORT, r);
     return r;
   }

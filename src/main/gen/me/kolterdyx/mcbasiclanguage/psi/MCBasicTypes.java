@@ -4,19 +4,23 @@ package me.kolterdyx.mcbasiclanguage.psi;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.PsiElement;
 import com.intellij.lang.ASTNode;
+import me.kolterdyx.mcbasiclanguage.stub.impl.MCBasicFunctionDeclarationStubElementType;
+import me.kolterdyx.mcbasiclanguage.stub.impl.MCBasicPlainImportStubElementType;
+import me.kolterdyx.mcbasiclanguage.stub.impl.MCBasicStructDeclarationStubElementType;
+import me.kolterdyx.mcbasiclanguage.stub.impl.MCBasicVariableDeclarationStubElementType;
 import me.kolterdyx.mcbasiclanguage.psi.impl.*;
 
 public interface MCBasicTypes {
 
   IElementType ALIASED_IMPORT = new MCBasicElementType("ALIASED_IMPORT");
   IElementType BASE_VALUE = new MCBasicElementType("BASE_VALUE");
-  IElementType FUNCTION_DECLARATION = new MCBasicElementType("FUNCTION_DECLARATION");
+  IElementType FUNCTION_DECLARATION = new MCBasicFunctionDeclarationStubElementType("FUNCTION_DECLARATION");
   IElementType IDENTIFIER_TYPE = new MCBasicElementType("IDENTIFIER_TYPE");
   IElementType PARAMETER = new MCBasicElementType("PARAMETER");
-  IElementType PLAIN_IMPORT = new MCBasicElementType("PLAIN_IMPORT");
+  IElementType PLAIN_IMPORT = new MCBasicPlainImportStubElementType("PLAIN_IMPORT");
   IElementType STATEMENT = new MCBasicElementType("STATEMENT");
-  IElementType STRUCT_DECLARATION = new MCBasicElementType("STRUCT_DECLARATION");
-  IElementType VARIABLE_DECLARATION = new MCBasicElementType("VARIABLE_DECLARATION");
+  IElementType STRUCT_DECLARATION = new MCBasicStructDeclarationStubElementType("STRUCT_DECLARATION");
+  IElementType VARIABLE_DECLARATION = new MCBasicVariableDeclarationStubElementType("VARIABLE_DECLARATION");
 
   IElementType COMMENT = new MCBasicTokenType("COMMENT");
   IElementType DOUBLE_LITERAL = new MCBasicTokenType("DOUBLE_LITERAL");

@@ -10,7 +10,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static me.kolterdyx.mcbasiclanguage.psi.MCBasicTypes.*;
 import me.kolterdyx.mcbasiclanguage.psi.*;
 
-public class MCBasicAliasedImportImpl extends MCBasicReferenceImpl implements MCBasicAliasedImport {
+public class MCBasicAliasedImportImpl extends MCBasicElementImpl implements MCBasicAliasedImport {
 
   public MCBasicAliasedImportImpl(@NotNull ASTNode node) {
     super(node);
@@ -29,7 +29,7 @@ public class MCBasicAliasedImportImpl extends MCBasicReferenceImpl implements MC
   @Override
   @Nullable
   public MCBasicPlainImport getPlainImport() {
-    return findChildByClass(MCBasicPlainImport.class);
+    return PsiTreeUtil.getChildOfType(this, MCBasicPlainImport.class);
   }
 
 }

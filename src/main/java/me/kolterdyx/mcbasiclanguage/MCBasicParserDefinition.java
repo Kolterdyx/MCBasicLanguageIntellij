@@ -9,12 +9,14 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
+import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.tree.IFileElementType;
 import com.intellij.psi.tree.TokenSet;
 import me.kolterdyx.mcbasiclanguage.parser.MCBasicParser;
 import me.kolterdyx.mcbasiclanguage.psi.MCBasicFile;
 import me.kolterdyx.mcbasiclanguage.psi.MCBasicTokenSets;
 import me.kolterdyx.mcbasiclanguage.psi.MCBasicTypes;
+import me.kolterdyx.mcbasiclanguage.stub.impl.MCBasicFunctionDeclarationStubElementType;
 import org.jetbrains.annotations.NotNull;
 
 final class MCBasicParserDefinition implements ParserDefinition {
