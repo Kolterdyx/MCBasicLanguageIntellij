@@ -82,7 +82,28 @@ private blockStatement ::= PUNCTUATION_LBRACE statement* PUNCTUATION_RBRACE
 private importStatement ::= KEYWORD_IMPORT importList KEYWORD_FROM STRING_LITERAL PUNCTUATION_SEMICOLON
 
 private importList ::= importSymbol ((PUNCTUATION_COMMA importSymbol)*)?
-private importSymbol ::= OP_MULTIPLY | IDENTIFIER (KEYWORD_AS IDENTIFIER)?
+
+private importSymbol ::= OP_MULTIPLY
+                        | aliasedImport
+                        | plainImport
+
+aliasedImport ::= IDENTIFIER KEYWORD_AS plainImport {
+  pin=1
+  recoverWhile=importRecover
+  mixin="me.kolterdyx.mcbasiclanguage.psi.impl.MCBasicReferenceImpl"
+  implements="me.kolterdyx.mcbasiclanguage.psi.MCBasicReference"
+  methods=[getElement]
+}
+
+plainImport ::= IDENTIFIER
+{
+  mixin="me.kolterdyx.mcbasiclanguage.psi.impl.MCBasicNamedElementImpl"
+  implements="me.kolterdyx.mcbasiclanguage.psi.MCBasicNamedElement"
+  methods=[getName setName getNameIdentifier]
+}
+
+private importRecover ::= !(PUNCTUATION_COMMA | KEYWORD_FROM)
+
 variableDeclaration ::= IDENTIFIER type OP_ASSIGN expression PUNCTUATION_SEMICOLON
 {
   mixin="me.kolterdyx.mcbasiclanguage.psi.impl.MCBasicNamedElementImpl"

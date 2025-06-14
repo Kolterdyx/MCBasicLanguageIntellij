@@ -2,27 +2,10 @@ package me.kolterdyx.mcbasiclanguage.psi.impl;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.util.PsiTreeUtil;
 import me.kolterdyx.mcbasiclanguage.psi.*;
 
 
 public class MCBasicPsiImplUtil {
-
-    private static PsiElement findFirstByType(PsiElement element, IElementType type) {
-        System.out.println("Element type: " + element.getNode().getElementType());
-        if (element.getNode().getElementType() == type) {
-            return element;
-        }
-        for (PsiElement child : element.getChildren()) {
-            PsiElement result = findFirstByType(child, type);
-            if (result != null) {
-                return result;
-            }
-        }
-        System.out.println("No identifier found in: " + element.getText());
-        return null;
-    }
 
     /* Function declaration */
     public static String getName(MCBasicFunctionDeclaration functionDeclaration) {
@@ -107,6 +90,28 @@ public class MCBasicPsiImplUtil {
 
     public static PsiElement getNameIdentifier(MCBasicParameter element) {
         return element.getFirstChild();
+    }
+
+
+    /* Imported symbols */
+    public static String getName(MCBasicPlainImport parameter) {
+        ASTNode parameterNameNode = parameter.getNode().findChildByType(MCBasicTypes.IDENTIFIER);
+        return parameterNameNode != null ? parameterNameNode.getText() : null;
+    }
+
+    public static PsiElement setName(MCBasicPlainImport element, String newName) {
+        PsiElement identifier = element.getNameIdentifier();
+        if (identifier != null) {
+            PsiElement newId = MCBasicElementFactory.createIdentifier(element.getProject(), newName);
+            if (newId != null) {
+                identifier.replace(newId);
+            }
+        }
+        return element;
+    }
+
+    public static PsiElement getNameIdentifier(MCBasicPlainImport element) {
+        return element.getLastChild();
     }
 
 }

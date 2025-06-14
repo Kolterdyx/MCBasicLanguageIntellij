@@ -8,10 +8,16 @@ import com.intellij.psi.PsiElement;
 public interface MCBasicStatement extends PsiElement {
 
   @NotNull
+  List<MCBasicAliasedImport> getAliasedImportList();
+
+  @NotNull
   List<MCBasicBaseValue> getBaseValueList();
 
   @Nullable
   MCBasicFunctionDeclaration getFunctionDeclaration();
+
+  @NotNull
+  List<MCBasicPlainImport> getPlainImportList();
 
   @NotNull
   List<MCBasicStatement> getStatementList();

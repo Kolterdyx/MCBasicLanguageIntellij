@@ -8,10 +8,12 @@ import me.kolterdyx.mcbasiclanguage.psi.impl.*;
 
 public interface MCBasicTypes {
 
+  IElementType ALIASED_IMPORT = new MCBasicElementType("ALIASED_IMPORT");
   IElementType BASE_VALUE = new MCBasicElementType("BASE_VALUE");
   IElementType FUNCTION_DECLARATION = new MCBasicElementType("FUNCTION_DECLARATION");
   IElementType IDENTIFIER_TYPE = new MCBasicElementType("IDENTIFIER_TYPE");
   IElementType PARAMETER = new MCBasicElementType("PARAMETER");
+  IElementType PLAIN_IMPORT = new MCBasicElementType("PLAIN_IMPORT");
   IElementType STATEMENT = new MCBasicElementType("STATEMENT");
   IElementType STRUCT_DECLARATION = new MCBasicElementType("STRUCT_DECLARATION");
   IElementType VARIABLE_DECLARATION = new MCBasicElementType("VARIABLE_DECLARATION");
@@ -65,7 +67,10 @@ public interface MCBasicTypes {
   class Factory {
     public static PsiElement createElement(ASTNode node) {
       IElementType type = node.getElementType();
-      if (type == BASE_VALUE) {
+      if (type == ALIASED_IMPORT) {
+        return new MCBasicAliasedImportImpl(node);
+      }
+      else if (type == BASE_VALUE) {
         return new MCBasicBaseValueImpl(node);
       }
       else if (type == FUNCTION_DECLARATION) {
@@ -76,6 +81,9 @@ public interface MCBasicTypes {
       }
       else if (type == PARAMETER) {
         return new MCBasicParameterImpl(node);
+      }
+      else if (type == PLAIN_IMPORT) {
+        return new MCBasicPlainImportImpl(node);
       }
       else if (type == STATEMENT) {
         return new MCBasicStatementImpl(node);
