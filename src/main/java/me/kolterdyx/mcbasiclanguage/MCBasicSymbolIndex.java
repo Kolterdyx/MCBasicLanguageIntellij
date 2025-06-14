@@ -14,7 +14,6 @@ public class MCBasicSymbolIndex extends StringStubIndexExtension<MCBasicNamedEle
 
     public static final MCBasicSymbolIndex INSTANCE = new MCBasicSymbolIndex();
 
-    // The key used for indexing named elements by their String name.
     public static final StubIndexKey<String, MCBasicNamedElement> KEY =
             StubIndexKey.createIndexKey("mcbasic.symbol.index");
 

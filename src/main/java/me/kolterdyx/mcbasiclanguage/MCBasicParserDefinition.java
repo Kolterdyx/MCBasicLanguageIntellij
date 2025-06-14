@@ -10,18 +10,22 @@ import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.stubs.IStubElementType;
+import com.intellij.psi.stubs.StubElement;
 import com.intellij.psi.tree.IFileElementType;
+import com.intellij.psi.tree.IStubFileElementType;
 import com.intellij.psi.tree.TokenSet;
 import me.kolterdyx.mcbasiclanguage.parser.MCBasicParser;
 import me.kolterdyx.mcbasiclanguage.psi.MCBasicFile;
 import me.kolterdyx.mcbasiclanguage.psi.MCBasicTokenSets;
 import me.kolterdyx.mcbasiclanguage.psi.MCBasicTypes;
+import me.kolterdyx.mcbasiclanguage.stub.MCBasicStubFile;
+import me.kolterdyx.mcbasiclanguage.stub.MCBasicStubFileElementType;
 import me.kolterdyx.mcbasiclanguage.stub.impl.MCBasicFunctionDeclarationStubElementType;
 import org.jetbrains.annotations.NotNull;
 
 final class MCBasicParserDefinition implements ParserDefinition {
 
-  public static final IFileElementType FILE = new IFileElementType(MCBasicLanguage.INSTANCE);
+  public static final IStubFileElementType<MCBasicStubFile> FILE = new MCBasicStubFileElementType();
 
   @NotNull
   @Override
@@ -49,7 +53,7 @@ final class MCBasicParserDefinition implements ParserDefinition {
 
   @NotNull
   @Override
-  public IFileElementType getFileNodeType() {
+  public IStubFileElementType<MCBasicStubFile> getFileNodeType() {
     return FILE;
   }
 

@@ -5,6 +5,7 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.PsiElement;
 import com.intellij.lang.ASTNode;
 import me.kolterdyx.mcbasiclanguage.stub.impl.MCBasicFunctionDeclarationStubElementType;
+import me.kolterdyx.mcbasiclanguage.stub.impl.MCBasicParameterStubElementType;
 import me.kolterdyx.mcbasiclanguage.stub.impl.MCBasicPlainImportStubElementType;
 import me.kolterdyx.mcbasiclanguage.stub.impl.MCBasicStructDeclarationStubElementType;
 import me.kolterdyx.mcbasiclanguage.stub.impl.MCBasicVariableDeclarationStubElementType;
@@ -16,7 +17,7 @@ public interface MCBasicTypes {
   IElementType BASE_VALUE = new MCBasicElementType("BASE_VALUE");
   IElementType FUNCTION_DECLARATION = new MCBasicFunctionDeclarationStubElementType("FUNCTION_DECLARATION");
   IElementType IDENTIFIER_TYPE = new MCBasicElementType("IDENTIFIER_TYPE");
-  IElementType PARAMETER = new MCBasicElementType("PARAMETER");
+  IElementType PARAMETER = new MCBasicParameterStubElementType("PARAMETER");
   IElementType PLAIN_IMPORT = new MCBasicPlainImportStubElementType("PLAIN_IMPORT");
   IElementType STATEMENT = new MCBasicElementType("STATEMENT");
   IElementType STRUCT_DECLARATION = new MCBasicStructDeclarationStubElementType("STRUCT_DECLARATION");

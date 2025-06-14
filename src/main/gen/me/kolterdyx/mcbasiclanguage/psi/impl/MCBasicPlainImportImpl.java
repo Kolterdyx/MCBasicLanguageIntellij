@@ -9,7 +9,7 @@ import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static me.kolterdyx.mcbasiclanguage.psi.MCBasicTypes.*;
 import me.kolterdyx.mcbasiclanguage.psi.*;
-import me.kolterdyx.mcbasiclanguage.stub.MCBasicNamedStub;
+import me.kolterdyx.mcbasiclanguage.stub.MCBasicNamedStubElement;
 import com.intellij.psi.stubs.IStubElementType;
 
 public class MCBasicPlainImportImpl extends MCBasicNamedElementImpl implements MCBasicPlainImport {
@@ -18,7 +18,7 @@ public class MCBasicPlainImportImpl extends MCBasicNamedElementImpl implements M
     super(node);
   }
 
-  public MCBasicPlainImportImpl(@NotNull MCBasicNamedStub stub, IStubElementType<?, ?> type) {
+  public MCBasicPlainImportImpl(@NotNull MCBasicNamedStubElement stub, IStubElementType<?, ?> type) {
     super(stub, type);
   }
 

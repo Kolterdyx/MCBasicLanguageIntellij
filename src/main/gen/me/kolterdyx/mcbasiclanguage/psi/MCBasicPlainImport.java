@@ -5,8 +5,8 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.StubBasedPsiElement;
-import me.kolterdyx.mcbasiclanguage.stub.MCBasicNamedStub;
+import me.kolterdyx.mcbasiclanguage.stub.MCBasicNamedStubElement;
 
-public interface MCBasicPlainImport extends MCBasicNamedElement, StubBasedPsiElement<MCBasicNamedStub> {
+public interface MCBasicPlainImport extends MCBasicNamedElement, StubBasedPsiElement<MCBasicNamedStubElement> {
 
 }

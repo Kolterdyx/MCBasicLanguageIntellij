@@ -95,7 +95,7 @@ private alias ::= KEYWORD_AS plainImport {
 plainImport ::= importIdentifier {
   mixin="me.kolterdyx.mcbasiclanguage.psi.impl.MCBasicNamedElementImpl"
   implements="me.kolterdyx.mcbasiclanguage.psi.MCBasicNamedElement"
-  stubClass = "me.kolterdyx.mcbasiclanguage.stub.MCBasicNamedStub"
+  stubClass = "me.kolterdyx.mcbasiclanguage.stub.MCBasicNamedStubElement"
   elementTypeClass = "me.kolterdyx.mcbasiclanguage.stub.impl.MCBasicPlainImportStubElementType"
 }
 
@@ -107,16 +107,16 @@ private importRecover ::= !(PUNCTUATION_COMMA | KEYWORD_FROM)
 
 variableDeclaration ::= IDENTIFIER type OP_ASSIGN expression PUNCTUATION_SEMICOLON
 {
+  stubClass = "me.kolterdyx.mcbasiclanguage.stub.MCBasicNamedStubElement"
   mixin="me.kolterdyx.mcbasiclanguage.psi.impl.MCBasicNamedElementImpl"
   implements="me.kolterdyx.mcbasiclanguage.psi.MCBasicNamedElement"
-  stubClass = "me.kolterdyx.mcbasiclanguage.stub.MCBasicNamedStub"
   elementTypeClass = "me.kolterdyx.mcbasiclanguage.stub.impl.MCBasicVariableDeclarationStubElementType"
 }
 private ifStatement ::= KEYWORD_IF PUNCTUATION_LPAREN expression PUNCTUATION_RPAREN blockStatement (KEYWORD_ELSE blockStatement | ifStatement)?
 functionDeclaration ::= IDENTIFIER PUNCTUATION_LPAREN parameterList? PUNCTUATION_RPAREN type? blockStatement
 {
-  stubClass = "me.kolterdyx.mcbasiclanguage.stub.MCBasicNamedStub"
   mixin="me.kolterdyx.mcbasiclanguage.psi.impl.MCBasicNamedElementImpl"
+  stubClass = "me.kolterdyx.mcbasiclanguage.stub.MCBasicNamedStubElement"
   implements="me.kolterdyx.mcbasiclanguage.psi.MCBasicNamedElement"
   elementTypeClass = "me.kolterdyx.mcbasiclanguage.stub.impl.MCBasicFunctionDeclarationStubElementType"
 }
@@ -126,7 +126,7 @@ structDeclaration ::= IDENTIFIER PUNCTUATION_LBRACE structField* PUNCTUATION_RBR
 {
   mixin="me.kolterdyx.mcbasiclanguage.psi.impl.MCBasicNamedElementImpl"
   implements="me.kolterdyx.mcbasiclanguage.psi.MCBasicNamedElement"
-  stubClass = "me.kolterdyx.mcbasiclanguage.stub.MCBasicNamedStub"
+  stubClass = "me.kolterdyx.mcbasiclanguage.stub.MCBasicNamedStubElement"
   elementTypeClass = "me.kolterdyx.mcbasiclanguage.stub.impl.MCBasicStructDeclarationStubElementType"
 }
 private expressionStatement ::= expression PUNCTUATION_SEMICOLON
@@ -166,7 +166,8 @@ parameter ::= IDENTIFIER type
 {
   mixin="me.kolterdyx.mcbasiclanguage.psi.impl.MCBasicNamedElementImpl"
   implements="me.kolterdyx.mcbasiclanguage.psi.MCBasicNamedElement"
-  stubClass = "me.kolterdyx.mcbasiclanguage.stub.MCBasicNamedStub"
+  stubClass = "me.kolterdyx.mcbasiclanguage.stub.MCBasicNamedStubElement"
+  elementTypeClass = "me.kolterdyx.mcbasiclanguage.stub.impl.MCBasicParameterStubElementType"
 }
 
 private literal ::= STRING_LITERAL

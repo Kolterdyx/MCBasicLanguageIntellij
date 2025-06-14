@@ -4,11 +4,12 @@ package me.kolterdyx.mcbasiclanguage.psi;
 import com.intellij.extapi.psi.PsiFileBase;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.psi.FileViewProvider;
+import com.intellij.psi.PsiFile;
 import me.kolterdyx.mcbasiclanguage.MCBasicFileType;
 import me.kolterdyx.mcbasiclanguage.MCBasicLanguage;
 import org.jetbrains.annotations.NotNull;
 
-public class MCBasicFile extends PsiFileBase {
+public class MCBasicFile extends PsiFileBase implements PsiFile {
 
   public MCBasicFile(@NotNull FileViewProvider viewProvider) {
     super(viewProvider, MCBasicLanguage.INSTANCE);

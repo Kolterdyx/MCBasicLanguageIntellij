@@ -24,30 +24,15 @@ public class MCBasicPsiReference extends PsiReferenceBase<MCBasicElement> {
     @Override
     public @Nullable PsiElement resolve() {
         String name = getValue();
-        PsiFile file = getElement().getContainingFile();
-        System.out.println("Resolving reference for: " + name);
-        MCBasicSymbolIndex.INSTANCE.getAllKeys(myElement.getProject()).forEach(key -> {
-            System.out.println("Index key: " + key);
-        });
-        return PsiTreeUtil.findChildrenOfType(file, MCBasicNamedElement.class)
-                .stream()
-                .filter(e -> name.equals(e.getName()))
-                .findFirst()
-                .orElse(null);
-//        String name = getValue();
-//        Project project = myElement.getProject();
-//        return MCBasicSymbolIndex.INSTANCE.get(name, project, GlobalSearchScope.allScope(project))
-//                .stream().findFirst().orElse(null);
+        Project project = myElement.getProject();
+        return MCBasicSymbolIndex.INSTANCE.get(name, project, GlobalSearchScope.allScope(project))
+                .stream().findFirst().orElse(null);
+
     }
 
     @Override
     public Object @NotNull [] getVariants() {
-//        Project project = myElement.getProject();
-//        return MCBasicSymbolIndex.INSTANCE.getAllKeys(project).toArray();
-        return PsiTreeUtil.findChildrenOfType(getElement().getContainingFile(), MCBasicNamedElement.class)
-                .stream()
-                .map(PsiNamedElement::getName)
-                .filter(Objects::nonNull)
-                .toArray();
+        Project project = myElement.getProject();
+        return MCBasicSymbolIndex.INSTANCE.getAllKeys(project).toArray();
     }
 }
