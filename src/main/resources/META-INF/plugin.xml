@@ -2,7 +2,7 @@
 <idea-plugin>
 
   <id>me.kolterdyx.mcbasiclanguage</id>
-  <version>0.1.0</version>
+  <version>0.1.1</version>
   <idea-version since-build="242"/>
 
 

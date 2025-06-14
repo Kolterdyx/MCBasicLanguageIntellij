@@ -703,14 +703,56 @@ public class MCBasicParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // KEYWORD_IMPORT (OP_MULTIPLY | IDENTIFIER (KEYWORD_AS IDENTIFIER)?) KEYWORD_FROM STRING_LITERAL PUNCTUATION_SEMICOLON
+  // importSymbol ((PUNCTUATION_COMMA importSymbol)*)?
+  static boolean importList(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "importList")) return false;
+    if (!nextTokenIs(b, "", IDENTIFIER, OP_STAR)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = importSymbol(b, l + 1);
+    r = r && importList_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // ((PUNCTUATION_COMMA importSymbol)*)?
+  private static boolean importList_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "importList_1")) return false;
+    importList_1_0(b, l + 1);
+    return true;
+  }
+
+  // (PUNCTUATION_COMMA importSymbol)*
+  private static boolean importList_1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "importList_1_0")) return false;
+    while (true) {
+      int c = current_position_(b);
+      if (!importList_1_0_0(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "importList_1_0", c)) break;
+    }
+    return true;
+  }
+
+  // PUNCTUATION_COMMA importSymbol
+  private static boolean importList_1_0_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "importList_1_0_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = PUNCTUATION_COMMA(b, l + 1);
+    r = r && importSymbol(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // KEYWORD_IMPORT importList KEYWORD_FROM STRING_LITERAL PUNCTUATION_SEMICOLON
   static boolean importStatement(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "importStatement")) return false;
     if (!nextTokenIs(b, KEYWORD_IMPORT)) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = KEYWORD_IMPORT(b, l + 1);
-    r = r && importStatement_1(b, l + 1);
+    r = r && importList(b, l + 1);
     r = r && KEYWORD_FROM(b, l + 1);
     r = r && consumeToken(b, STRING_LITERAL);
     r = r && PUNCTUATION_SEMICOLON(b, l + 1);
@@ -718,38 +760,40 @@ public class MCBasicParser implements PsiParser, LightPsiParser {
     return r;
   }
 
+  /* ********************************************************** */
   // OP_MULTIPLY | IDENTIFIER (KEYWORD_AS IDENTIFIER)?
-  private static boolean importStatement_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "importStatement_1")) return false;
+  static boolean importSymbol(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "importSymbol")) return false;
+    if (!nextTokenIs(b, "", IDENTIFIER, OP_STAR)) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = OP_MULTIPLY(b, l + 1);
-    if (!r) r = importStatement_1_1(b, l + 1);
+    if (!r) r = importSymbol_1(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
 
   // IDENTIFIER (KEYWORD_AS IDENTIFIER)?
-  private static boolean importStatement_1_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "importStatement_1_1")) return false;
+  private static boolean importSymbol_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "importSymbol_1")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = consumeToken(b, IDENTIFIER);
-    r = r && importStatement_1_1_1(b, l + 1);
+    r = r && importSymbol_1_1(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
 
   // (KEYWORD_AS IDENTIFIER)?
-  private static boolean importStatement_1_1_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "importStatement_1_1_1")) return false;
-    importStatement_1_1_1_0(b, l + 1);
+  private static boolean importSymbol_1_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "importSymbol_1_1")) return false;
+    importSymbol_1_1_0(b, l + 1);
     return true;
   }
 
   // KEYWORD_AS IDENTIFIER
-  private static boolean importStatement_1_1_1_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "importStatement_1_1_1_0")) return false;
+  private static boolean importSymbol_1_1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "importSymbol_1_1_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = KEYWORD_AS(b, l + 1);

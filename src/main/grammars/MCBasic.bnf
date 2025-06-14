@@ -79,7 +79,10 @@ statement ::= KEYWORD_LET variableDeclaration
 // STATEMENT
 
 private blockStatement ::= PUNCTUATION_LBRACE statement* PUNCTUATION_RBRACE
-private importStatement ::= KEYWORD_IMPORT (OP_MULTIPLY | IDENTIFIER (KEYWORD_AS IDENTIFIER)?) KEYWORD_FROM STRING_LITERAL PUNCTUATION_SEMICOLON
+private importStatement ::= KEYWORD_IMPORT importList KEYWORD_FROM STRING_LITERAL PUNCTUATION_SEMICOLON
+
+private importList ::= importSymbol ((PUNCTUATION_COMMA importSymbol)*)?
+private importSymbol ::= OP_MULTIPLY | IDENTIFIER (KEYWORD_AS IDENTIFIER)?
 variableDeclaration ::= IDENTIFIER type OP_ASSIGN expression PUNCTUATION_SEMICOLON
 {
   mixin="me.kolterdyx.mcbasiclanguage.psi.impl.MCBasicNamedElementImpl"
